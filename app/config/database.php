@@ -7,7 +7,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => 'a32',
-		'database' => 'nomnom',
+		'database' => 'firehose',
 		'prefix' => '',
 	);
 }
