@@ -18,7 +18,7 @@ $(function() {
             xAxis : {
                 maxZoom : 14 * 24 * 3600000 // fourteen days
             },
-            
+
             series : [{
                 name : 'AAPL',
                 data : data,
@@ -30,4 +30,3 @@ $(function() {
     });
 
 });
-

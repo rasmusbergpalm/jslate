@@ -34,14 +34,12 @@ class DbviewsController extends AppController {
 				$this->Session->setFlash(__('The dbview could not be saved. Please, try again.', true));
 			}
 		}
-                $files = scandir(APP.'templates'.DS.'views');
-                App::import('Xml');
-                foreach($files as $f){
-                    if($f == '.' || $f == '..' || $f == '.svn') continue;
-                    $templates[] =  Set::reverse(new Xml(APP.'templates'.DS.'views'.DS.$f.DS.$f.'.xml'));
-                    $templates[count($templates)-1]['Template']['code'] = file_get_contents(APP.'templates'.DS.'views'.DS.$f.DS.$f.'.js');
-                }
-		$this->set(compact('templates','dashboard_id'));
+            $files = glob(APP.'templates'.DS.'*.js');
+            foreach($files as $f){
+                $templates[basename($f)] =  file_get_contents($f);
+            }
+            //pr($templates);
+            $this->set(compact('templates','dashboard_id'));
 	}
 
 	function edit($id = null) {
