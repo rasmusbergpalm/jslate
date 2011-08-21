@@ -1,0 +1,16 @@
+Nomnom is a data aggregation and visualization tool
+
+It uses mysql for the app itself and couchdb for the data
+
+INSTALL:
+install LAMP
+enable mod_rewrite
+run /app/config/schema/nomnom.sql
+checkout to /var/www/nomnom/
+
+install couchdb
+create database 'data'
+create design doc: tagsdate with view: tagsdate with map:
+"function(doc) {\nif(doc.date){\nemit(doc.date, doc);\n}\nfor(var idx in doc.tags){\n emit(doc.tags[idx], doc);\n}\n\n}"
+
+Now give nomnom some data. He needs it!

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<template>
+<name>tagvalue_vs_time</name>
+<author>rasmusbergpalm@gmail.com</author>
+<description>Timeseries plot of tag.value</description>
+</template>
+
