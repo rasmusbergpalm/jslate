@@ -21,14 +21,14 @@ class DbviewsController extends AppController {
 			$this->Dbview->create();
 
                         $this->data['Dbview']['name'] = $template;
-                        $this->data['Dbview']['code'] = file_get_contents(APP.'templates'.DS.'views'.DS.$template.DS.$template.'.js');
+                        $this->data['Dbview']['code'] = file_get_contents(APP.'templates'.DS.$template);
                         $this->data['Dbview']['dashboard_id'] = $dashboard_id;
                         $this->data['Dbview']['left'] = 100;
                         $this->data['Dbview']['top'] = 100;
-                        $this->data['Dbview']['width'] = 300;
+                        $this->data['Dbview']['width'] = 400;
                         $this->data['Dbview']['height'] = 300;
 			if ($this->Dbview->save($this->data)) {
-				$this->Session->setFlash(__('The dbview has been saved', true));
+				$this->Session->setFlash(__('The widget has been added', true));
 				$this->redirect(array('controller' => 'dashboards','action' => 'view', $dashboard_id));
 			} else {
 				$this->Session->setFlash(__('The dbview could not be saved. Please, try again.', true));

@@ -5,15 +5,15 @@
         $id = $dbview['id'];
 
         echo "<div class='dragbox' id='dragbox_$id'
-        style='position: relative; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width']+20)."px; height: ".($dbview['height']+40)."px;'>
+        style='position: absolute; z-index: $id; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>
         <div class='header'>
-        <span>".$dbview['name']."</span>";
+        <span>&nbsp;</span>";
         echo $this->Html->link('X', "/dbviews/delete/$id", array('style' =>'float: right; margin-left: 10px;'));
         echo $this->Html->link('edit', "/dbviews/edit/$id", array('style' =>'float: right;', 'class' => 'editlink'));
 
         
         echo "</div>
-        <div class='dragbox-content' id='view$id' style='clear: both; width: ".$dbview['width']."px; height: ".$dbview['height']."px;'>Loading...</div>
+        <div class='dragbox-content' id='view$id' style='clear: both; width: ".($dbview['width']-10)."px; height: ".($dbview['height']-40)."px;'>Loading...</div>
         </div>";
     }
     ?>

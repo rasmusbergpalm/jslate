@@ -7,6 +7,7 @@
         style='float: left; width: 420px; height: 320px;'>
         <div class='header' style='cursor: default;'>
         <span>$name</span>";
+        echo $this->Html->link('Add', "/dbviews/add/$dashboard_id/$name", array('style' =>'float: right; margin-left: 10px;'));
         echo "</div>
         <div class='dragbox-content' id='view$id' style='clear: both; width: 400px; height: 300px;'>Loading...</div>
         </div>";
