@@ -7,7 +7,7 @@ ul.topnav {
 	background: #222;
 	font-size: 1.2em;
 	background: url(../img/topnav_bg.gif) repeat-x;
-        z-index: 20;
+        z-index: 999999;
 }
 ul.topnav li {
 	float: left;
@@ -15,7 +15,7 @@ ul.topnav li {
 	padding: 0 15px 0 0;
 	position: relative; /*--Declare X and Y axis base for sub navigation--*/
         list-style: none;
-        z-index: 20;
+        z-index: 999999;
 }
 ul.topnav li a{
 	padding: 10px 5px;

@@ -3,19 +3,6 @@ class DbviewsController extends AppController {
 
 	var $name = 'Dbviews';
 
-	function index() {
-		$this->Dbview->recursive = 0;
-		$this->set('dbviews', $this->paginate());
-	}
-
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid dbview', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('dbview', $this->Dbview->read(null, $id));
-	}
-
 	function add($dashboard_id, $template = null) {
 		if (!empty($template) && !empty($dashboard_id)) {
 			$this->Dbview->create();
@@ -31,7 +18,7 @@ class DbviewsController extends AppController {
 				$this->Session->setFlash(__('The widget has been added', true));
 				$this->redirect(array('controller' => 'dashboards','action' => 'view', $dashboard_id));
 			} else {
-				$this->Session->setFlash(__('The dbview could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
 			}
 		}
             $files = glob(APP.'templates'.DS.'*.js');
@@ -44,15 +31,15 @@ class DbviewsController extends AppController {
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid dbview', true));
+			$this->Session->setFlash(__('Invalid widget', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Dbview->save($this->data)) {
-				$this->Session->setFlash(__('The dbview has been saved', true));
+				$this->Session->setFlash(__('The widget has been saved', true));
 				$this->redirect($this->referer());
 			} else {
-				$this->Session->setFlash(__('The dbview could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -66,7 +53,7 @@ class DbviewsController extends AppController {
             $this->autoRender = false;
 
                 if (!$id && empty($this->data)) {
-                        $this->Session->setFlash(__('Invalid dashboards item', true));
+                        $this->Session->setFlash(__('Invalid widget', true));
                         $this->redirect(array('action' => 'index'));
                 }
                 if (!empty($this->data)) {
@@ -87,14 +74,14 @@ class DbviewsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for dbview', true));
+			$this->Session->setFlash(__('Invalid id for widget', true));
 			$this->redirect($this->referer());
 		}
 		if ($this->Dbview->delete($id)) {
-                        $this->Session->setFlash(__('Dbview was deleted', true));
+                        $this->Session->setFlash(__('Widget was deleted', true));
 			$this->redirect($this->referer());
 		}
-		$this->Session->setFlash(__('Dbview was not deleted', true));
+		$this->Session->setFlash(__('Widget was not deleted', true));
 		$this->redirect($this->referer());
 	}
 }

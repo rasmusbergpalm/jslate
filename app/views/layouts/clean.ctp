@@ -82,7 +82,14 @@
                     <span style="float: left; color: white;">
                         <ul class="topnav">
                             <li>
-                                <a><?php echo (!empty($dashboard_id) ? $dblist[$dashboard_id] : 'Dashboards'); ?></a>
+                                <?php
+                                if(!empty($dashboard_id)){
+                                    echo $this->Html->link($dblist[$dashboard_id], array('controller' => 'dashboards','action' => 'view', $dashboard_id));
+                                }else{
+                                    echo "<a>Dashboards</a>";
+                                }
+                                ?>
+                                
                                 <ul class="subnav">
                                     <?php
                                         foreach($dblist as $id => $name){

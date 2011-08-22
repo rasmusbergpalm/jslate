@@ -4,8 +4,8 @@ class DashboardsController extends AppController {
 	var $name = 'Dashboards';
 
 	function index() {
-		$this->Dashboard->recursive = 0;
-		$this->set('dashboards', $this->paginate());
+		$db = $this->Dashboard->find('first');
+		$this->redirect(array('action' => 'view', $db['Dashboard']['id']));
 	}
 
 	function view($id = null) {

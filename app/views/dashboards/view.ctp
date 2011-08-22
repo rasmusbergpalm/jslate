@@ -7,7 +7,7 @@
         echo "<div class='dragbox' id='dragbox_$id'
         style='position: absolute; z-index: $id; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>
         <div class='header'>
-        <span>&nbsp;</span>";
+        <span>".$dbview['name']."</span>";
         echo $this->Html->link('X', "/dbviews/delete/$id", array('style' =>'float: right; margin-left: 10px;'));
         echo $this->Html->link('edit', "/dbviews/edit/$id", array('style' =>'float: right;', 'class' => 'editlink'));
 
@@ -24,7 +24,11 @@
         $code = $dbview['code'];
         echo "$('#view$id').ready(function(){";
         echo "var viewid = 'view$id';";
+        echo "try{";
         echo "$code";
+        echo "}catch(e){";
+        echo "$('#view$id').text(e.toString());";
+        echo "}";
         echo "});";
     }
     ?>

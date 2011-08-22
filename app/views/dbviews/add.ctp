@@ -4,7 +4,7 @@
         $id = $i;
 
         echo "<div class='dragbox' id='dragbox_$id'
-        style='float: left; width: 420px; height: 320px;'>
+        style='float: left; width: 420px; height: 340px;'>
         <div class='header' style='cursor: default;'>
         <span>$name</span>";
         echo $this->Html->link('Add', "/dbviews/add/$dashboard_id/$name", array('style' =>'float: right; margin-left: 10px;'));
