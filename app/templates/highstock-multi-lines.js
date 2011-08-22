@@ -1,4 +1,4 @@
-$(function() {
+
     var seriesOptions = [],
         yAxisOptions = [],
         seriesCounter = 0,
@@ -53,6 +53,7 @@ $(function() {
             
             plotOptions: {
                 series: {
+                    
                     compare: 'percent'
                 }
             },
@@ -66,4 +67,4 @@ $(function() {
         });
     }
 
-});
+

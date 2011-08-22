@@ -18,10 +18,17 @@
     $i=0;
     foreach ($templates as $name=>$code){
         $id = $i;
+        
         echo "$('#view$id').ready(function(){";
         echo "var viewid = 'view$id';";
+        echo "try{";
         echo "$code";
+        echo "}catch(e){";
+        echo "$('#view$id').text(e.toString());";
+        echo "}";
+        
         echo "});";
+        
         $i++;
     }
 ?>
