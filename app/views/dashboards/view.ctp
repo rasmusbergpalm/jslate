@@ -9,7 +9,7 @@
         <div class='header'>
         <span>".$dbview['name']."</span>";
         echo $this->Html->link('X', "/dbviews/delete/$id", array('style' =>'float: right; margin-left: 10px;'));
-        echo $this->Html->link('edit', "/dbviews/edit/$id", array('style' =>'float: right;', 'class' => 'editlink'));
+        echo $this->Html->link('edit', "/dbviews/edit/$id", array('style' =>'float: right;', 'class' => 'cbox'));
 
         
         echo "</div>
@@ -33,7 +33,6 @@
     }
     ?>
         $(function(){
-            $('.editlink').colorbox({width:"80%", height:"100%"});
 
             $(".dragbox").draggable({
                 handle: ".header",

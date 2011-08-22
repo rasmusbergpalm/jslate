@@ -36,6 +36,8 @@
             ?>
             <script type="text/javascript">
                 $(document).ready(function(){
+                    $('.cbox').colorbox();
+
                     window.setTimeout(function(){
                         $('#flashMessage').toggle('slow');
                     }, 5000);
@@ -99,6 +101,7 @@
                                 </ul>
                             </li>
                             <?php if(!empty($dashboard_id)): ?>
+                                <li><a><?php echo $this->Html->link('Add dashboard', '/dashboards/add/', array('class' => 'cbox')); ?></a></li>
                                 <li><a><?php echo $this->Html->link('Add widget', '/dbviews/add/'.$dashboard_id); ?></a></li>
                             <?php endif ?>
                         </ul>
