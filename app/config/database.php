@@ -6,8 +6,8 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => 'a32',
-		'database' => 'firehose',
+		'password' => '',
+		'database' => 'jslate',
 		'prefix' => '',
 	);
 }
