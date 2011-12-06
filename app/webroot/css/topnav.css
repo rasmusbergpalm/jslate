@@ -15,7 +15,7 @@ ul.topnav li {
 	padding: 0 15px 0 0;
 	position: relative; /*--Declare X and Y axis base for sub navigation--*/
         list-style: none;
-        z-index: 999999;
+        z-index: 99;
 }
 ul.topnav li a{
 	padding: 10px 5px;

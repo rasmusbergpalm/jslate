@@ -34,12 +34,24 @@
  */
 class AppController extends Controller {
     public $layout = 'clean';
-    public $components = array('RequestHandler', 'Session');
+    public $components = array('RequestHandler', 'Session', 'Auth');
     public $helpers = array('Form', 'Html', 'Javascript', 'Time', 'Session');
 
     function beforeFilter(){
+
+        $this->Auth->fields = array(
+            'username' => 'email',
+            'password' => 'password'
+        );
         $this->loadModel('Dashboard');
-        $this->set('dblist', $this->Dashboard->find('list'));
+        
+        if($this->Auth->user('id')!==null){
+            $this->set('dblist', $this->Dashboard->find('list', array(
+                'conditions' => array(
+                    'user_id' => $this->Auth->user('id')
+                )
+            )));
+        }
     }
 
 }

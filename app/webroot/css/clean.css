@@ -27,8 +27,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 :focus { outline: 0; }
 body {
 	line-height: 1;
-	color: black;
-	background: white;
+	color: #E2E2E2;
+	background: #0E0D0D;
 }
 ol, ul {
 	list-style: none;
@@ -114,7 +114,6 @@ code {
 /* -- Layout ------------------------------- */
 
 body {
-	background: white;
 	height: 125px;
 	position: relative;
 }
@@ -247,17 +246,16 @@ dd {
 .dragbox{
     margin:5px 2px  20px;
     
-    background:#fff;
     position:relative;
-    border:1px solid #ddd;
+    border:1px solid #222;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
 }
 .dragbox .header{
     margin:0;
     padding:5px;
-    background:#f0f0f0;
-    border-bottom:1px solid #eee;
+    background:#222;
+    border-bottom:1px solid #222;
     cursor:move;
 }
 .dragbox h2{
@@ -265,11 +263,11 @@ dd {
     color:#000;
 }
 .dragbox-content{
-    background:#fff;
+    
     min-height:100px; margin:5px;
     font-family:'Lucida Grande', Verdana; font-size:0.8em; line-height:1.5em;
 }
-#flashMessage{
+#flashMessage, #authMessage{
     position: fixed;
     float: left;
     top: 0px;

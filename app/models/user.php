@@ -1,10 +1,19 @@
 <?php
-class Dashboard extends AppModel {
-        
-	var $name = 'Dashboard';
-	var $displayField = 'name';
+class User extends AppModel {
+	var $name = 'User';
+	var $displayField = 'email';
 	var $validate = array(
-		'name' => array(
+		'email' => array(
+			'email' => array(
+				'rule' => array('email'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'password' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -18,9 +27,9 @@ class Dashboard extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
-		'Dbview' => array(
-			'className' => 'Dbview',
-			'foreignKey' => 'dashboard_id',
+		'Dashboard' => array(
+			'className' => 'Dashboard',
+			'foreignKey' => 'user_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -32,15 +41,5 @@ class Dashboard extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
-        function belongsToUser($dashboard_id, $user_id){
-            $dashboard = $this->find('first',array(
-                'conditions' => array(
-                    'id' => $dashboard_id,
-                    'user_id' => $user_id
-                )
-            ));
-            return !empty($dashboard) ? true : false;
-        }
 
 }

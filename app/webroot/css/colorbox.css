@@ -28,7 +28,7 @@
     #cboxMiddleRight{width:21px; background:url(images/controls.png) right top repeat-y;}
     #cboxTopCenter{height:21px; background:url(images/border.png) 0 0 repeat-x;}
     #cboxBottomCenter{height:21px; background:url(images/border.png) 0 -29px repeat-x;}
-    #cboxContent{background:#fff; overflow:hidden;}
+    #cboxContent{background:white; overflow:hidden; color: black;}
         #cboxError{padding:50px; border:1px solid #ccc;}
         #cboxLoadedContent{margin-bottom:28px;}
         #cboxTitle{position:absolute; bottom:4px; left:0; text-align:center; width:100%; color:#949494;}
