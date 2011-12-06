@@ -15,18 +15,15 @@ class UsersController extends AppController {
 
         }
 
-
-
 	function index() {
-            
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
+                $this->redirect(array('action' => 'view'));
 	}
 
         function login(){}
 
-	function view($id = null) {
-		if (!$id) {
+	function view() {
+		$id = $this->Auth->user('id');
+                if (!$id) {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect(array('action' => 'index'));
 		}
@@ -45,7 +42,8 @@ class UsersController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	function edit() {
+                $id = $this->Auth->user('id');
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid user', true));
 			$this->redirect(array('action' => 'index'));
@@ -63,7 +61,8 @@ class UsersController extends AppController {
 		}
 	}
 
-	function delete($id = null) {
+	function delete() {
+                $id = $this->Auth->user('id');
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for user', true));
 			$this->redirect(array('action'=>'index'));
