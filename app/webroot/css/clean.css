@@ -29,6 +29,7 @@ body {
 	line-height: 1;
 	color: #E2E2E2;
 	background: #0E0D0D;
+        background-image: url('../img/main-pattern.png');
 }
 ol, ul {
 	list-style: none;
@@ -276,6 +277,7 @@ dd {
     background-color: white;
     text-align: center;
     z-index:10;
+    color: black;
 
     -webkit-border-radius: 0px 0px 10px 10px;
     -moz-border-radius: 0px 0px 10px 10px;

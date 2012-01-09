@@ -34,7 +34,7 @@
  */
 class AppController extends Controller {
     public $layout = 'clean';
-    public $components = array('RequestHandler', 'Session', 'Auth');
+    public $components = array('RequestHandler', 'Session', 'Auth','Security');
     public $helpers = array('Form', 'Html', 'Javascript', 'Time', 'Session');
 
     function beforeFilter(){
@@ -44,6 +44,7 @@ class AppController extends Controller {
             'password' => 'password'
         );
         $this->loadModel('Dashboard');
+        $this->Security->validatePost = false;
         
         if($this->Auth->user('id')!==null){
             $this->set('dblist', $this->Dashboard->find('list', array(
