@@ -7,4 +7,3 @@ $this->path = '/';
 ini_set('session.cookie_path', $this->path);
 ini_set('session.cookie_domain', env('HTTP_BASE'));
 ?>
-
