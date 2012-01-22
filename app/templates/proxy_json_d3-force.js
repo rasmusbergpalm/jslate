@@ -1,7 +1,7 @@
 var w = $('#'+viewid).width(),
     h = $('#'+viewid).height(),
     fill = d3.scale.category20();
-console.log(w,h);
+
 d3.select("#"+viewid).html('');
 var vis = d3.select("#"+viewid).append("svg")
     .attr("width", w)
