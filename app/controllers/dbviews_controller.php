@@ -45,8 +45,9 @@ class DbviewsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Dbview->read(null, $id);
 		}
+                $dashboard_id = $this->data['Dbview']['dashboard_id'];
 		$dashboards = $this->Dbview->Dashboard->find('list');
-		$this->set(compact('dashboards'));
+		$this->set(compact('dashboards','dashboard_id'));
 	}
 
         function update($id = null) {

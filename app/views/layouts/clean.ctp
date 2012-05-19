@@ -12,7 +12,7 @@
             echo $this->Html->css('jquery-ui');
 
             echo $this->Html->css('codemirror/codemirror');
-            echo $this->Html->css('codemirror/default');
+            echo $this->Html->css('codemirror/ambiance');
             echo $this->Html->css('colorbox');
             echo $this->Html->css('topnav');
 
@@ -22,6 +22,9 @@
 
             echo $this->Javascript->link('codemirror/codemirror');
             echo $this->Javascript->link('codemirror/javascript');
+            echo $this->Javascript->link('codemirror/xml');
+            echo $this->Javascript->link('codemirror/css');
+            echo $this->Javascript->link('codemirror/htmlmixed');
 
             echo $this->Javascript->link('highstock');
             echo $this->Javascript->link('gray');

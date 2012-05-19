@@ -125,6 +125,7 @@
  *
  */
 	Configure::write('Session.save', 'my_session');
+        
 
 /**
  * The model name to be used for the session model.
