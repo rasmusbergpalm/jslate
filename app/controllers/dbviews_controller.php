@@ -21,7 +21,7 @@ class DbviewsController extends AppController {
 				$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
 			}
 		}
-            $files = glob(APP.'templates'.DS.'*.js');
+            $files = glob(APP.'templates'.DS.'*.html');
             foreach($files as $f){
                 $templates[basename($f)] =  file_get_contents($f);
             }
