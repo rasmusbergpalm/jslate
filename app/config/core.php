@@ -124,8 +124,7 @@
  * the cake shell command: cake schema create Sessions
  *
  */
-	Configure::write('Session.save', 'my_session');
-        
+	Configure::write('Session.save', 'php');
 
 /**
  * The model name to be used for the session model.
