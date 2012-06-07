@@ -1,10 +1,11 @@
 <?php
-
+	$zid=1;
     foreach ($dashboard['Dbview'] as $dbview){
+		$zid++;
         $id = $dbview['id'];
         $code = $dbview['code'];
         echo "<div class='dragbox' id='dragbox_$id'
-        style=' overflow: hidden; position: absolute; z-index: $id; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>
+        style=' overflow: hidden; position: absolute; z-index: $zid; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>
             <div class='header'>
                 <span>&nbsp;";
                 echo $this->Html->link('x', "/dbviews/delete/$id", array('style' =>'float: right; margin-left: 10px;'));
