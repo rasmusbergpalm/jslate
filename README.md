@@ -7,16 +7,22 @@ jSlate provides a php proxy so the widgets can request data from off-site locati
 
 # Installation
 
-install LAMP  
-enable mod_rewrite  
+install LAMP
+
+enable mod_rewrite
+
 run app/config/schema/jSlate.sql
+
 checkout to /var/www/jslate/
+
 edit app/config/database.php to match your settings
+
 open up localhost/jslate
 
 # Known issues
 
-The templates using proxy.php expect jslate to run on the root, i.e. localhost/ 
+The templates using proxy.php expect jslate to run on the root, i.e. localhost/
+
 If you are running in a subfolder you'll need to adjust the reference to /proxy.php to jslate/proxy.php
 
 # Licensing
