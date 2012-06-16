@@ -2,7 +2,7 @@
   .CodeMirror {
     float: left;
     width: 50%;
-    border: 1px solid black;
+    border-right: 2px dashed gray;
   }
   .CodeMirror-scroll {
         height: auto;
@@ -12,10 +12,10 @@
       }
   #preview {
     width: 49%;
-    float: left;
+    position: fixed;
+    left: 51%;
     height: 600px;
     border: 1px solid black;
-    border-left: 0px;
   }
 </style>
 <span id="autosaved">Auto-save is ON.</span>
@@ -49,24 +49,5 @@
         $('#preview').html(code.getValue());
       }
       setTimeout(updatePreviewAndSave, 300);
-
-
-    /*
-    $(document).ready(function(){
-        window.setTimeout(function(){
-            var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("DbviewCode"), {lineNumbers: true, matchBrackets: true, indentUnit: 4});
-        }, 500);
-    });
-    $('#DbviewHtml').ready(function(){
-        window.setTimeout(function(){
-            var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("DbviewHtml"), {lineNumbers: true, matchBrackets: true, indentUnit: 4});
-        }, 500);
-
-    });
-    $('#DbviewCss').ready(function(){
-        window.setTimeout(function(){
-            var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("DbviewCss"), {lineNumbers: true, matchBrackets: true, indentUnit: 4});
-        }, 500);
-    });*/
     
 </script>

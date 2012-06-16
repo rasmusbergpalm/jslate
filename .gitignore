@@ -1,3 +1,5 @@
+.idea
+*.iml
 tmp/*
 config/database.php
 app/tmp/*

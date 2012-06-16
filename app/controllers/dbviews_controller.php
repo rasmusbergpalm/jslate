@@ -16,7 +16,7 @@ class DbviewsController extends AppController {
                         $this->data['Dbview']['height'] = 300;
 			if ($this->Dbview->save($this->data)) {
 				$this->Session->setFlash(__('The widget has been added', true));
-				$this->redirect(array('controller' => 'dashboards','action' => 'view', $dashboard_id));
+				$this->redirect(array('controller' => 'dbviews','action' => 'edit', $this->Dbview->getLastInsertId()));
 			} else {
 				$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
 			}
@@ -25,7 +25,6 @@ class DbviewsController extends AppController {
             foreach($files as $f){
                 $templates[basename($f)] =  file_get_contents($f);
             }
-            //pr($templates);
             $this->set(compact('templates','dashboard_id'));
 	}
 
