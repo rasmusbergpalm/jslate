@@ -15,17 +15,16 @@ class DbviewsController extends AppController {
                         $this->data['Dbview']['width'] = 400;
                         $this->data['Dbview']['height'] = 300;
 			if ($this->Dbview->save($this->data)) {
-				$this->Session->setFlash(__('The widget has been added', true));
 				$this->redirect(array('controller' => 'dbviews','action' => 'edit', $this->Dbview->getLastInsertId()));
 			} else {
 				$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
 			}
 		}
-            $files = glob(APP.'templates'.DS.'*.html');
-            foreach($files as $f){
-                $templates[basename($f)] =  file_get_contents($f);
-            }
-            $this->set(compact('templates','dashboard_id'));
+        $files = glob(APP.'templates'.DS.'*.html');
+        foreach($files as $f){
+            $templates[basename($f)] =  file_get_contents($f);
+        }
+        $this->set(compact('templates','dashboard_id'));
 	}
 
 	function edit($id = null) {
@@ -35,7 +34,6 @@ class DbviewsController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->Dbview->save($this->data)) {
-				$this->Session->setFlash(__('The widget has been saved', true));
 				$this->redirect($this->referer());
 			} else {
 				$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));

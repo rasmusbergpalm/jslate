@@ -4,6 +4,7 @@
 		$zid++;
         $id = $dbview['id'];
         $code = $dbview['code'];
+        echo "<textarea id='code$id' style='display: none;'>$code</textarea>";
         echo "<div class='dragbox' id='dragbox_$id'
         style=' overflow: hidden; position: absolute; z-index: $zid; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>
             <div class='header'>
@@ -42,10 +43,12 @@
                     var id = ui.helper.context.id.split('_')[1];
                     $.ajax({
                         type: "POST",
-
                         url: "<?php echo $this->Html->url('/dbviews/update/')?>"+id,
                         data: {data:{width: ui.size.width, height: ui.size.height}},
                         success: function(msg){
+                            $('#view'+id).height((ui.size.height-30)+'px')
+                            $('#view'+id).width((ui.size.width-10)+'px')
+                            $('#view'+id).html($('#code'+id).val())
                             console.log(msg);
                         }
                     });
