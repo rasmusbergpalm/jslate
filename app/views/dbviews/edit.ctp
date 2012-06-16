@@ -19,7 +19,7 @@
         border: 1px solid black;
     }
 </style>
-<h2>Edit your widget</h2>
+<h2>Create your widget</h2>
 <span id="autosaved">Auto-save is ON</span>
 
 <div style='width:50%; text-align: center;'>Code</div>

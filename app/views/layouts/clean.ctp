@@ -112,7 +112,7 @@
                 <span style="float: right; color: white; margin-right: 60px;">
                     <ul class="topnav">
 
-                            <li><?php echo $this->Html->link($html->image("add.png", array('style'=>'width: 32px; margin-top:-8px; float: left;')).' Add widget', '/dbviews/add/' . $dashboard_id, array('escape' =>false)); ?></li>
+                            <li><?php echo $this->Html->link($html->image("add.png", array('style'=>'width: 32px; margin-top:-8px; float: left;')).' Create widget', '/dbviews/add/' . $dashboard_id, array('escape' =>false)); ?></li>
                             <li>
                                 <a>Config<?php echo $html->image("config.png", array('style'=>'width: 32px; margin-top:-8px; float: left;')); ?> </a>
                                 <ul class="subnav">
