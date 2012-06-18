@@ -1,5 +1,5 @@
 <style type="text/css">
-    .CodeMirror {
+    #code_outer {
         float: left;
         width: 50%;
         border-right: 2px dashed gray;
@@ -23,14 +23,14 @@
 <span id="autosaved">Auto-save is ON</span>
 
 <div style='width:50%; text-align: center;'>Code</div>
-
-
+<div id='code_outer'>
 <?php echo $this->Form->create('Dbview');?>
     <?php
         echo $this->Form->input('id', array('label'=>false));
         echo $this->Form->input('code', array('id'=>'code','label'=>false));
     ?>
 <?php echo $this->Form->end();?>
+</div>
 <div id="preview_outer">
     <div style='width:100%; text-align: center;'>Preview</div>
     <div id="preview">
