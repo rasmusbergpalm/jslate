@@ -6,7 +6,7 @@ ini_set('session.referer_check', '');
 // ini_restore('session.referer_check');
 
 //Cookie lifetime set to 0, so session is destroyed when browser is closed and doesn't persist for days as it does by default when Security.level is 'low' or 'medium'
-ini_set('session.cookie_lifetime', 3600);
+ini_set('session.cookie_lifetime', 31536000);
 
 //Now this feels a bit hacky so it would surely be nice to have a config variable for cookie path instead.
 //Cookie path is now '/' even if your app is within a sub directory on the domain
