@@ -17,7 +17,11 @@ checkout to /var/www/jslate/
 
 edit app/config/database.php to match your settings
 
-open up localhost/jslate
+open up localhost/jslate/users/add
+
+Add a user
+
+Go to localhost/jslate and login
 
 # Known issues
 
