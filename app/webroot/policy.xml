@@ -1,0 +1,10 @@
+<META xmlns="http://www.w3.org/2002/01/P3Pv1">
+ <POLICY-REFERENCES>
+  <EXPIRY max-age="172800"/>
+
+    <POLICY-REF about="/P3P-Policy.xml">
+      <INCLUDE>/*</INCLUDE>
+    </POLICY-REF>
+
+ </POLICY-REFERENCES>
+</META>
