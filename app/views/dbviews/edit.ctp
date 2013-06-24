@@ -4,12 +4,12 @@
         width: 50%;
         border-right: 2px dashed gray;
     }
-    .CodeMirror-scroll {
-        height: auto;
-        overflow-y: hidden;
-        overflow-x: auto;
-        width: 100%;
+    .CodeMirror
+    {
+    	 height: auto;
+    	 width: 100%;
     }
+   
     #preview_outer {
         width: 49%;
         position: fixed;
@@ -20,7 +20,8 @@
     }
 </style>
 <h2>Create your widget</h2>
-<span id="autosaved">Auto-save is ON</span>
+<span id="autosaved">Auto-save <input id="autosaved_check" type="checkbox"/></span>
+<input type="button" onclick="updatePreviewAndSave()" value="Save"/>
 
 <div style='width:50%; text-align: center;'>Code</div>
 <div id='code_outer'>
@@ -39,6 +40,16 @@
 </div>
 
 <script type="text/javascript">
+
+function showAutocomplete(cm)
+{
+	var state = cm.getStateAfter(cm.getCursor().line);
+	if ( state.localMode && state.localMode.name == 'javascript')
+		CodeMirror.showHint(cm, CodeMirror.javascriptHint);
+	else
+		CodeMirror.showHint(cm, CodeMirror.htmlHint);
+}
+
     var delay;
 
     var code = CodeMirror.fromTextArea(document.getElementById('code'), {
@@ -48,11 +59,19 @@
         matchBrackets: true,
         theme: 'ambiance',
         indentUnit: 4,
-        onChange: function() {
-            clearTimeout(delay);
-            delay = setTimeout(updatePreviewAndSave, 1000);
+        extraKeys: 
+        {
+        	"Ctrl-Space": showAutocomplete
         }
     });
+    
+    code.on('change', function() {
+        	  if ($('#autosaved_check').is(':checked'))
+        	  {
+            clearTimeout(delay);
+            delay = setTimeout(updatePreviewAndSave, 1000);
+           }
+        });
 
     function updatePreviewAndSave() {
         code.save();
