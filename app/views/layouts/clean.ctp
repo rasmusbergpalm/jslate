@@ -11,8 +11,9 @@
             echo $this->Html->css('clean');
             echo $this->Html->css('jquery-ui');
 
-            echo $this->Html->css('codemirror/codemirror');
-            echo $this->Html->css('codemirror/ambiance');
+            echo $this->Html->css('codemirror-3.14/codemirror');
+            echo $this->Html->css('codemirror-3.14/ambiance');
+            echo $this->Html->css('codemirror-3.14/hint/show-hint');
             echo $this->Html->css('colorbox');
             echo $this->Html->css('topnav');
 
@@ -20,11 +21,16 @@
             echo $this->Javascript->link('jquery-ui');
             echo $this->Javascript->link('jquery.colorbox-min');
 
-            echo $this->Javascript->link('codemirror/codemirror');
-            echo $this->Javascript->link('codemirror/javascript');
-            echo $this->Javascript->link('codemirror/xml');
-            echo $this->Javascript->link('codemirror/css');
-            echo $this->Javascript->link('codemirror/htmlmixed');
+            echo $this->Javascript->link('codemirror-3.14/codemirror');
+            echo $this->Javascript->link('codemirror-3.14/javascript');
+            echo $this->Javascript->link('codemirror-3.14/xml');
+            echo $this->Javascript->link('codemirror-3.14/css');
+            echo $this->Javascript->link('codemirror-3.14/htmlmixed');
+            
+            echo $this->Javascript->link('codemirror-3.14/hint/show-hint.js');
+				echo $this->Javascript->link('codemirror-3.14/hint/html-hint.js');
+				echo $this->Javascript->link('codemirror-3.14/hint/javascript-hint.js');
+				echo $this->Javascript->link('codemirror-3.14/hint/xml-hint.js');
 
             echo $this->Javascript->link('highstock');
             echo $this->Javascript->link('gray');

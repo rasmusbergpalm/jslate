@@ -4,12 +4,12 @@
         width: 50%;
         border-right: 2px dashed gray;
     }
-    .CodeMirror-scroll {
-        height: auto;
-        overflow-y: hidden;
-        overflow-x: auto;
-        width: 100%;
+    .CodeMirror
+    {
+    	 height: auto;
+    	 width: 100%;
     }
+
     #preview_outer {
         width: 49%;
         position: fixed;
@@ -39,6 +39,16 @@
 </div>
 
 <script type="text/javascript">
+
+function showAutocomplete(cm)
+{
+	var state = cm.getStateAfter(cm.getCursor().line);
+	if ( state.localMode && state.localMode.name == 'javascript')
+		CodeMirror.showHint(cm, CodeMirror.javascriptHint);
+	else
+		CodeMirror.showHint(cm, CodeMirror.htmlHint);
+}
+
     var delay;
 
     var code = CodeMirror.fromTextArea(document.getElementById('code'), {
@@ -51,6 +61,10 @@
         onChange: function() {
             clearTimeout(delay);
             delay = setTimeout(updatePreviewAndSave, 1000);
+        },
+        extraKeys: 
+        {
+        	"Ctrl-Space": showAutocomplete
         }
     });
 
