@@ -8,6 +8,7 @@ class DbviewsController extends AppController {
 		{
 			$this->Dbview->create();
 			$this->data['Dbview']['name'] = $template;
+			$this->data['Dbview']['code'] = file_get_contents(APP.'templates'.DS.$template);
 			$this->data['Dbview']['dashboard_id'] = $dashboard_id;
 			$this->data['Dbview']['left'] = 100;
 			$this->data['Dbview']['top'] = 100;
@@ -16,12 +17,7 @@ class DbviewsController extends AppController {
 			
 			if ($this->Dbview->save($this->data)) 
 			{
-				$widget_id = $this->Dbview->getLastInsertID() . '_' . $dashboard_id;
-				$this->data['Dbview']['code'] = str_replace('${widget_id}', $widget_id, file_get_contents(APP.'templates'.DS.$template));
-				if ($this->Dbview->save($this->data))
-					$this->redirect(array('controller' => 'dbviews','action' => 'edit', $this->Dbview->getLastInsertId()));
-				else
-					$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
+				$this->redirect(array('controller' => 'dbviews','action' => 'edit', $this->Dbview->getLastInsertId()));
 			} 
 			else 
 			{
