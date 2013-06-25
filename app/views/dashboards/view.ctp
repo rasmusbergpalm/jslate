@@ -3,7 +3,8 @@
     foreach ($dashboard['Dbview'] as $dbview){
 		$zid++;
         $id = $dbview['id'];
-        $code = $dbview['code'];
+        $wid = $id.'_'.$dashboard_id;
+        $code = str_replace('${wid}', $wid, $dbview['code']);
         echo "<textarea id='code$id' style='display: none;'>$code</textarea>";
         echo "<div class='dragbox' id='dragbox_$id'
         style=' overflow: hidden; position: absolute; z-index: $zid; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>
