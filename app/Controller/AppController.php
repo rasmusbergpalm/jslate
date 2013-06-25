@@ -15,6 +15,7 @@ class AppController extends Controller {
     public $components = array(
         'Session',
         'Security',
+        'RequestHandler',
         'Auth' => array(
         'authenticate' => array(
             'Form' => array(
@@ -27,6 +28,7 @@ class AppController extends Controller {
     function beforeFilter(){
         $this->loadModel('Dashboard');
         $this->Security->validatePost = false;
+        $this->Security->csrfCheck = false;
 
         if($this->Auth->user('id') !== null){
             $this->set('dblist', $this->Dashboard->find('list', array(
