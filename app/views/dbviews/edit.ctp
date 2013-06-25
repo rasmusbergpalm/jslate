@@ -4,10 +4,9 @@
         width: 50%;
         border-right: 2px dashed gray;
     }
-    .CodeMirror
-    {
-    	 height: auto;
-    	 width: 100%;
+    .CodeMirror {
+        height: auto;
+        width: 100%;
     }
    
     #preview_outer {
@@ -41,43 +40,41 @@
 
 <script type="text/javascript">
 
-function showAutocomplete(cm)
-{
-	var state = cm.getStateAfter(cm.getCursor().line);
-	if ( state.localMode && state.localMode.name == 'javascript')
-		CodeMirror.showHint(cm, CodeMirror.javascriptHint);
-	else
-		CodeMirror.showHint(cm, CodeMirror.htmlHint);
+function showAutocomplete(cm) {
+    var state = cm.getStateAfter(cm.getCursor().line);
+    if ( state.localMode && state.localMode.name == 'javascript') {
+        CodeMirror.showHint(cm, CodeMirror.javascriptHint);
+    } else {
+        CodeMirror.showHint(cm, CodeMirror.htmlHint);
+    }
 }
 
-    var delay;
+var delay;
 
-    var code = CodeMirror.fromTextArea(document.getElementById('code'), {
+var code = CodeMirror.fromTextArea(document.getElementById('code'), {
         mode: 'text/html',
         tabMode: 'indent',
         lineNumbers: true,
         matchBrackets: true,
         theme: 'ambiance',
         indentUnit: 4,
-        extraKeys: 
-        {
-        	"Ctrl-Space": showAutocomplete
+        extraKeys: {
+            "Ctrl-Space": showAutocomplete
         }
     });
-    
-    code.on('change', function() {
-        	  if ($('#autosaved_check').is(':checked'))
-        	  {
+
+code.on('change', function() {
+        if ($('#autosaved_check').is(':checked')) {
             clearTimeout(delay);
             delay = setTimeout(updatePreviewAndSave, 1000);
-           }
-        });
+        }
+    });
 
-    function updatePreviewAndSave() {
-        code.save();
-        $.post("<?php echo $this->Html->url(array('controller'=>'dbviews','action'=>'edit', $this->data['Dbview']['id'])); ?>", $("#DbviewEditForm").serialize());
-        $('#preview').html(code.getValue());
-    }
-    setTimeout(updatePreviewAndSave, 300);
+function updatePreviewAndSave() {
+    code.save();
+    $.post("<?php echo $this->Html->url(array('controller'=>'dbviews','action'=>'edit', $this->data['Dbview']['id'])); ?>", $("#DbviewEditForm").serialize());
+    $('#preview').html(code.getValue());
+}
+setTimeout(updatePreviewAndSave, 300);
     
 </script>

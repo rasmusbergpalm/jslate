@@ -7,20 +7,20 @@
         </title>
         <?php
             echo $this->Html->meta('icon');
-
+            
             echo $this->Html->css('clean');
             echo $this->Html->css('jquery-ui');
-
+            
             echo $this->Html->css('codemirror-3.14/codemirror');
             echo $this->Html->css('codemirror-3.14/ambiance');
             echo $this->Html->css('codemirror-3.14/hint/show-hint');
             echo $this->Html->css('colorbox');
             echo $this->Html->css('topnav');
-
+            
             echo $this->Javascript->link('jquery');
             echo $this->Javascript->link('jquery-ui');
             echo $this->Javascript->link('jquery.colorbox-min');
-
+            
             echo $this->Javascript->link('codemirror-3.14/codemirror');
             echo $this->Javascript->link('codemirror-3.14/javascript');
             echo $this->Javascript->link('codemirror-3.14/xml');
@@ -28,13 +28,13 @@
             echo $this->Javascript->link('codemirror-3.14/htmlmixed');
             
             echo $this->Javascript->link('codemirror-3.14/hint/show-hint.js');
-				echo $this->Javascript->link('codemirror-3.14/hint/html-hint.js');
-				echo $this->Javascript->link('codemirror-3.14/hint/javascript-hint.js');
-				echo $this->Javascript->link('codemirror-3.14/hint/xml-hint.js');
-
+            echo $this->Javascript->link('codemirror-3.14/hint/html-hint.js');
+            echo $this->Javascript->link('codemirror-3.14/hint/javascript-hint.js');
+            echo $this->Javascript->link('codemirror-3.14/hint/xml-hint.js');
+            
             echo $this->Javascript->link('highstock');
             echo $this->Javascript->link('gray');
-
+            
             echo $this->Javascript->link('d3/d3');
             echo $this->Javascript->link('d3/d3.csv');
             echo $this->Javascript->link('d3/d3.chart');
@@ -42,7 +42,7 @@
             echo $this->Javascript->link('d3/d3.geom');
             echo $this->Javascript->link('d3/d3.layout');
             echo $this->Javascript->link('d3/d3.time');
-
+            
             echo $scripts_for_layout;
         ?>
             <script type="text/javascript">
