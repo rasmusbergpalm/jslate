@@ -4,19 +4,27 @@ class DbviewsController extends AppController {
 	var $name = 'Dbviews';
 
 	function add($dashboard_id, $template = null) {
-		if (!empty($template) && !empty($dashboard_id)) {
+		if (!empty($template) && !empty($dashboard_id)) 
+		{
 			$this->Dbview->create();
-
-                        $this->data['Dbview']['name'] = $template;
-                        $this->data['Dbview']['code'] = file_get_contents(APP.'templates'.DS.$template);
-                        $this->data['Dbview']['dashboard_id'] = $dashboard_id;
-                        $this->data['Dbview']['left'] = 100;
-                        $this->data['Dbview']['top'] = 100;
-                        $this->data['Dbview']['width'] = 400;
-                        $this->data['Dbview']['height'] = 300;
-			if ($this->Dbview->save($this->data)) {
-				$this->redirect(array('controller' => 'dbviews','action' => 'edit', $this->Dbview->getLastInsertId()));
-			} else {
+			$this->data['Dbview']['name'] = $template;
+			$this->data['Dbview']['dashboard_id'] = $dashboard_id;
+			$this->data['Dbview']['left'] = 100;
+			$this->data['Dbview']['top'] = 100;
+			$this->data['Dbview']['width'] = 400;
+			$this->data['Dbview']['height'] = 300;
+			
+			if ($this->Dbview->save($this->data)) 
+			{
+				$widget_id = $this->Dbview->getLastInsertID() . '_' . $dashboard_id;
+				$this->data['Dbview']['code'] = str_replace('${widget_id}', $widget_id, file_get_contents(APP.'templates'.DS.$template));
+				if ($this->Dbview->save($this->data))
+					$this->redirect(array('controller' => 'dbviews','action' => 'edit', $this->Dbview->getLastInsertId()));
+				else
+					$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
+			} 
+			else 
+			{
 				$this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
 			}
 		}

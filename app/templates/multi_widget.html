@@ -1,0 +1,16 @@
+<div>The symbol widget_id surrounded by ${} will be replaced
+	when the widget is added to the dashboard.  The replaced value is 
+	in the form of 3_10 where 3 is the widget id and 10 is the dashboard id.
+	This provides a unique id for this widget so it can be added to a dashboard
+	more than once.  You will need to view source to see what I mean.
+</div>
+<div id="multi_widget_${widget_id}"></div>
+
+<script type="text/javascript">
+
+$(function()
+{
+	$('#multi_widget_${widget_id}').text("Hey");
+});
+
+</script>
