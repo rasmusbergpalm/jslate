@@ -17,9 +17,7 @@
             echo $this->Html->css('colorbox');
             echo $this->Html->css('topnav');
 
-            //echo $this->Html->script('jquery');
             echo $this->Html->script('jquery-1.10.1');
-            //echo $this->Html->script('jquery-ui');
             echo $this->Html->script('jquery-ui-1.10.3.custom.min');
             echo $this->Html->script('jquery.colorbox-min');
 
