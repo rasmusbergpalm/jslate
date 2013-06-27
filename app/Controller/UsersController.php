@@ -20,7 +20,7 @@ class UsersController extends AppController {
     function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
+                $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again'));
             }
@@ -31,20 +31,21 @@ class UsersController extends AppController {
         $id = $this->Auth->user('id');
         if (!$id) {
             $this->Session->setFlash(__('Invalid user'));
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('action' => 'login'));
         }
         $this->set('user', $this->User->read(null, $id));
     }
 
     function add() {
+        //TODO Look for the user to see if they already exist
         if (!empty($this->request->data)) {
-            if ($this->request->data['User']['password'] == $this->Auth->password($this->request->data['User']['password2'])) {
+            if ($this->request->data['User']['password'] == $this->request->data['User']['password2']) {
                 $this->User->create();
 
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash(__('The user has been saved'));
                     $this->Auth->login($this->request->data);
-                    $this->redirect(array('controller' => 'dashboards', 'action' => 'index'));
+                    $this->redirect(array('action' => 'login'));
                 } else {
                     $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
                 }
