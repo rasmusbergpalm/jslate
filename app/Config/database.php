@@ -10,7 +10,7 @@ class DATABASE_CONFIG {
         'password' => '',
         'database' => 'jslate',
         'prefix' => '',
-        'unix_socket' => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock'
+        //'unix_socket' => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock'
         //'encoding' => 'utf8',
     );
 }
