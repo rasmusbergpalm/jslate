@@ -14,8 +14,8 @@ class UserFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'email' => 'Lorem ipsum dolor sit amet',
-			'password' => 'Lorem ipsum dolor sit amet'
+			'email' => 'test@test.com',
+			'password' => 'test'
 		),
 	);
 
