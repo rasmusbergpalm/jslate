@@ -16,7 +16,7 @@ before_script:
             'persistent' => false,
             'datasource' => 'Database/Mysql',
             'host' => '0.0.0.0',
-            'login' => 'travis'
+            'login' => 'travis',
             'password' => '',
             'database' => 'jslate',
             'prefix' => ''
@@ -25,7 +25,7 @@ before_script:
             'persistent' => false,
             'datasource' => 'Database/Mysql',
             'host' => '0.0.0.0',
-            'login' => 'travis'
+            'login' => 'travis',
             'password' => '',
             'database' => 'jslate_test',
             'prefix' => ''
