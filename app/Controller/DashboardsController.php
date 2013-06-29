@@ -12,14 +12,14 @@ class DashboardsController extends AppController {
             $this->request->data['Dashboard']['name'] = 'New Dashboard';
             $this->add();
         } else {
-            $this->redirect(array('action' => 'view', $db['Dashboard']['id']));
+            return $this->redirect(array('action' => 'view', $db['Dashboard']['id']));
         }
     }
 
     function view($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Invalid dashboard'));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
         $dashboard = $this->Dashboard->read(null, $id);
         if (!empty($dashboard) && $dashboard['Dashboard']['user_id'] === $this->Auth->user('id')) {
@@ -27,7 +27,7 @@ class DashboardsController extends AppController {
             $this->set('dashboard', $dashboard);
         } else {
             $this->Session->setFlash('Invalid dashboard');
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
     }
 
@@ -37,7 +37,7 @@ class DashboardsController extends AppController {
             $this->Dashboard->create();
             if ($this->Dashboard->save($this->request->data)) {
                 $this->Session->setFlash(__('The dashboard has been saved'));
-                $this->redirect(array('action' => 'view', $this->Dashboard->getLastInsertId()));
+                return $this->redirect(array('action' => 'view', $this->Dashboard->getLastInsertId()));
             } else {
                 $this->Session->setFlash(__('The dashboard could not be saved. Please, try again.'));
             }
@@ -49,7 +49,7 @@ class DashboardsController extends AppController {
             if (!empty($this->request->data)) {
                 if ($this->Dashboard->save($this->request->data)) {
                     $this->Session->setFlash(__('The dashboard has been saved'));
-                    $this->redirect($this->referer());
+                    return $this->redirect($this->referer());
                 } else {
                     $this->Session->setFlash(__('The dashboard could not be saved. Please, try again.'));
                 }
@@ -59,7 +59,7 @@ class DashboardsController extends AppController {
             }
         } else {
             $this->Session->setFlash(__('Invalid dashboard'));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
     }
 
@@ -68,13 +68,13 @@ class DashboardsController extends AppController {
         if ($id && $this->Dashboard->belongsToUser($id, $this->Auth->user('id'))) {
             if ($this->Dashboard->delete($id)) {
                 $this->Session->setFlash(__('Dashboard deleted'));
-                $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'index'));
             }
             $this->Session->setFlash(__('Dashboard was not deleted'));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         } else {
             $this->Session->setFlash(__('Invalid dashboard'));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
     }
 }
