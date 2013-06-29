@@ -34,7 +34,7 @@ before_script:
   - sh -c "./app/Console/cake migrate"
 
 script:
-  - sh -c "./lib/Cake/Console/cake test core AllTests --stderr"
+  - sh -c "./lib/Cake/Console/cake test app AllTests --stderr"
 
 notifications:
   email: false
