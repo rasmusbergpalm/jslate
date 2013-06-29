@@ -1,4 +1,6 @@
 <?php
+App::uses('AppController', 'Controller');
+
 class DbviewsController extends AppController {
 
     var $name = 'Dbviews';
