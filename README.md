@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rasmusbergpalm/jslate.png?branch=master)](https://travis-ci.org/rasmusbergpalm/jslate)
+
 # jSlate
 
 jSlate enables you to setup dashboards for displaying data easily.  
