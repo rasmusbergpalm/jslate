@@ -17,12 +17,12 @@ class AppController extends Controller {
         'Security',
         'RequestHandler',
         'Auth' => array(
-        'authenticate' => array(
-            'Form' => array(
-                'fields' => array('username' => 'email')
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'email')
+                )
             )
-        )
-    ));
+        ));
     public $helpers = array('Form', 'Html', 'Time', 'Session');
 
     function beforeFilter(){

@@ -73,7 +73,6 @@ class FormAuthenticate extends BaseAuthenticate {
 
 		$fields = $this->settings['fields'];
 		if (!$this->_checkFields($request, $model, $fields)) {
-            debug("hest");
 			return false;
 		}
 

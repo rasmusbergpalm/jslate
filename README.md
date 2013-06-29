@@ -11,7 +11,7 @@ jSlate provides a php proxy so the widgets can request data from off-site locati
  - Download jslate to your web directory (e.g. /jslate)
  - Edit app/config/database.php to match your settings
  - Ensure app/tmp folder is writeable by user and webserver
- - In the app directory run: ```../lib/Cake/Console/cake migrate ```
+ - Run: ```app/Console/cake migrate```
  - Open up localhost/jslate/users/add
  - Add a user
  - Go to localhost/jslate and login
@@ -20,7 +20,7 @@ jSlate provides a php proxy so the widgets can request data from off-site locati
  If you already have jSlate installed and have run migrate_new_edit.sql, then you should do the following:
 
  - Move all SQL files in app/Config/Schema/migrations to another folder
- - In the app directory run: ```../lib/Cake/Console/cake migrate ```
+ - Run: ```app/Console/cake migrate```
  - Manually add '20130629132807-initial' and '20130629132829-html-widgets' to the __migrations table
  - Move the SQL files back
  - You can now safely run ```cake migrate``` in the future.
