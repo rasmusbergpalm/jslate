@@ -5,7 +5,6 @@ class DashboardsController extends AppController {
 
     var $name = 'Dashboards';
 
-
     function index() {
         $db = $this->Dashboard->find('first', array('conditions' => array('user_id' => $this->Auth->user('id'))));
         if (empty($db)) {
@@ -22,7 +21,7 @@ class DashboardsController extends AppController {
             return $this->redirect(array('action' => 'index'));
         }
         $dashboard = $this->Dashboard->read(null, $id);
-        if (!empty($dashboard) && $dashboard['Dashboard']['user_id'] === $this->Auth->user('id')) {
+        if (!empty($dashboard) && $dashboard['Dashboard']['user_id'] == $this->Auth->user('id')) {
             $this->set('dashboard_id', $id);
             $this->set('dashboard', $dashboard);
         } else {

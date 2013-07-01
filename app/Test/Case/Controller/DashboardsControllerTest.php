@@ -5,87 +5,90 @@ App::uses('DashboardsController', 'Controller');
  * DashboardsController Test Case
  *
  */
-class DashboardsControllerTest extends ControllerTestCase {
+require_once TESTS . 'AuthMocker.php';
 
-/**
- * Fixtures
- *
- * @var array
- */
-	public $fixtures = array(
-		'app.dashboard',
-		'app.dbview',
-        'app.user'
-	);
+class DashboardsControllerTest extends AuthMocker {
+    public $fixtures = array('app.dashboard', 'app.dbview', 'app.user');
 
-    public $user;
+    var $name = 'Dashboards';
+    var $mocks = array();
 
-    public function user(){
-        $args = func_get_args();
-        if($args[0] == null){
-            return $this->user;
-        }else{
-            return $this->user[$args[0]];
-        }
-    }
-
-    public function setUp(){
-        parent::setUp();
-        $this->user = array(
-            'id' => 1,
-            'email' => 'test@test.com'
-        );
-        $this->controller = $this->generate('Dashboards', array('components' => array('Auth' => array('user'))));
-        $this->controller->Auth->staticExpects($this->any())->method('user')->will($this->returnCallback(array($this, 'user')));
-    }
-
-
-/**
- * testIndex method
- *
- * @return void
- */
-	public function testIndexRedirectsToFirstDashboard() {
+    public function testIndexRedirectsToFirstDashboardUserOwns() {
+        $this->controller->Dashboard->save(array(
+            'Dashboard' => array(
+                'id' => 1,
+                'name' => 'foo',
+                'user_id' => 2
+            )
+        ));
+        $this->controller->Dashboard->save(array(
+            'Dashboard' => array(
+                'id' => 2,
+                'name' => 'bar',
+                'user_id' => 1
+            )
+        ));
+        $this->login(array('id' => 1, 'email' => 'foo'));
         $this->testAction('/dashboards/index');
+        $this->assertContains('dashboards/view/2', $this->headers['Location']);
+    }
+
+    public function testIfUserHasNoDashboardsIndexCreatesDashboardAndRedirectsToView() {
+        $this->login(array('id' => 1, 'email' => 'foo'));
+        $this->testAction('/dashboards/index');
+        $dashboard = $this->controller->Dashboard->find('first');
+        $this->assertEqual('1', $dashboard['Dashboard']['id']);
+        $this->assertEqual('1', $dashboard['Dashboard']['user_id']);
         $this->assertContains('dashboards/view/1', $this->headers['Location']);
-	}
-
-    public function testIfUserHasNoDashboardsIndexCreatesFirstDashboardAndRedirectsToView(){
-        $this->user = array('id'=>2, 'email'=>'test2@test.com');
-        $this->testAction('/dashboards/index');
-        $this->assertContains('dashboards/view/3', $this->headers['Location']);
     }
 
-/**
- * testView method
- *
- * @return void
- */
-	public function testView() {
-	}
+    public function testViewShowsDashboard() {
+        $name = uniqid();
+        $this->controller->Dashboard->save(array(
+            'Dashboard' => array(
+                'id' => 1,
+                'name' => $name,
+                'user_id' => 1
+            )
+        ));
+        $this->login(array('id' => 1, 'email' => 'foo'));
+        $vars = $this->testAction('/dashboards/view/1', array('return'=>'vars'));
+        $this->assertEqual($name, $vars['dashboard']['Dashboard']['name']);
+    }
 
-/**
- * testAdd method
- *
- * @return void
- */
-	public function testAdd() {
-	}
+    public function testViewRedirectToIndexIfUserAttemptsToSeeDashboardNotExistingOrNotHisOwn() {
+        $this->controller->Dashboard->save(array(
+            'Dashboard' => array(
+                'id' => 1,
+                'name' => uniqid(),
+                'user_id' => 2
+            )
+        ));
+        $this->login(array('id'=>1, 'email'=>'foo'));
+        $this->testAction('/dashboards/view/2');
+        $this->assertTextEndsWith('/', $this->headers['Location']);
 
-/**
- * testEdit method
- *
- * @return void
- */
-	public function testEdit() {
-	}
+        $this->testAction('/dashboards/view/1');
+        $this->assertTextEndsWith('/', $this->headers['Location']);
+    }
 
-/**
- * testDelete method
- *
- * @return void
- */
-	public function testDelete() {
-	}
+    public function testAddSavesAndRedirectsToView() {
+        $this->login(array('id' => 1, 'email' => 'foo'));
+        $name = uniqid();
+        $this->testAction('/dashboards/add', array('data' => array(
+            'Dashboard' => array(
+                'name' => $name
+            )
+        ), 'method' => 'post'));
+        $dashboard = $this->controller->Dashboard->find('first');
+        $this->assertEqual($name, $dashboard['Dashboard']['name']);
+        $this->assertContains('dashboards/view/1', $this->headers['Location']);
+    }
+
+    public function testEdit() {
+    }
+
+    public function testDelete() {
+    }
 
 }
