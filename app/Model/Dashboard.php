@@ -33,14 +33,14 @@ class Dashboard extends AppModel {
 		)
 	);
 
-        function belongsToUser($dashboard_id, $user_id){
-            $dashboard = $this->find('first',array(
-                'conditions' => array(
-                    'id' => $dashboard_id,
-                    'user_id' => $user_id
-                )
-            ));
-            return !empty($dashboard) ? true : false;
-        }
+    function belongsToUser($dashboard_id, $user_id){
+        $dashboard = $this->find('first',array(
+            'conditions' => array(
+                'id' => $dashboard_id,
+                'user_id' => $user_id
+            )
+        ));
+        return !empty($dashboard);
+    }
 
 }

@@ -1,4 +1,6 @@
 <?php
+App::uses('AppController', 'Controller');
+
 class UsersController extends AppController {
 
     var $name = 'Users';
@@ -10,17 +12,17 @@ class UsersController extends AppController {
     }
 
     function logout() {
-        $this->redirect($this->Auth->logout());
+        return $this->redirect($this->Auth->logout());
     }
 
     function index() {
-        $this->redirect(array('action' => 'view'));
+        return $this->redirect(array('action' => 'view'));
     }
 
     function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again'));
             }
@@ -31,7 +33,7 @@ class UsersController extends AppController {
         $id = $this->Auth->user('id');
         if (!$id) {
             $this->Session->setFlash(__('Invalid user'));
-            $this->redirect(array('action' => 'login'));
+            return $this->redirect(array('action' => 'login'));
         }
         $this->set('user', $this->User->read(null, $id));
     }
@@ -45,7 +47,7 @@ class UsersController extends AppController {
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash(__('The user has been saved'));
                     $this->Auth->login($this->request->data);
-                    $this->redirect(array('action' => 'login'));
+                    return $this->redirect(array('action' => 'login'));
                 } else {
                     $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
                 }
@@ -63,13 +65,13 @@ class UsersController extends AppController {
         $id = $this->Auth->user('id');
         if (!$id) {
             $this->Session->setFlash(__('Invalid id for user'));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
         if ($this->User->delete($id)) {
             $this->Session->setFlash(__('User deleted'));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(__('User was not deleted'));
-        $this->redirect(array('action' => 'index'));
+        return $this->redirect(array('action' => 'index'));
     }
 }

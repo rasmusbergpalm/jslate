@@ -1,27 +1,31 @@
+[![Build Status](https://travis-ci.org/rasmusbergpalm/jslate.png?branch=master)](https://travis-ci.org/rasmusbergpalm/jslate)
+
 # jSlate
 
 jSlate enables you to setup dashboards for displaying data easily.  
-A dashboard consists of widgets. Widgets are just javascript and can do anything.  
+A dashboard consists of widgets. Widgets are html/javascript and can do anything.  
 A number of templates for widgets are provided to get you started.  
 jSlate provides a php proxy so the widgets can request data from off-site locations.
 
 # Installation
 
-install LAMP
+ - Install LAMP (ensure mod_rewrite is enabled)
+ - Download jslate to your web directory (e.g. /jslate)
+ - Edit app/config/database.php to match your settings
+ - Ensure app/tmp folder is writeable by user and webserver
+ - Run: ```app/Console/cake migrate```
+ - Open up localhost/jslate/users/add
+ - Add a user
+ - Go to localhost/jslate and login
 
-enable mod_rewrite
+# Note if upgrading
+ If you already have jSlate installed and have run migrate_new_edit.sql, then you should do the following:
 
-run app/config/schema/jSlate.sql
-
-checkout to /var/www/jslate/
-
-edit app/config/database.php to match your settings
-
-open up localhost/jslate/users/add
-
-Add a user
-
-Go to localhost/jslate and login
+ - Move all SQL files in app/Config/Schema/migrations to another folder
+ - Run: ```app/Console/cake migrate```
+ - Manually add '20130629132807-initial' and '20130629132829-html-widgets' to the __migrations table
+ - Move the SQL files back
+ - You can now safely run ```cake migrate``` in the future.
 
 # Known issues
 
@@ -31,15 +35,10 @@ If you are running in a subfolder you'll need to adjust the reference to /proxy.
 
 # Licensing
 
-jSlate is free software: you can redistribute it and/or modify  
-it under the terms of the GNU General Public License as published by  
-the Free Software Foundation, either version 3 of the License, or  
-(at your option) any later version.  
+Copyright (C) 2013 Rasmus Berg Palm
 
-jSlate is distributed in the hope that it will be useful,  
-but WITHOUT ANY WARRANTY; without even the implied warranty of  
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the  
-GNU General Public License for more details.  
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-You should have received a copy of the GNU General Public License  
-along with jSlate.  If not, see <http://www.gnu.org/licenses/>.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

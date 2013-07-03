@@ -1,4 +1,6 @@
 <?php
+App::uses('AppController', 'Controller');
+
 class DbviewsController extends AppController {
 
     var $name = 'Dbviews';
@@ -15,7 +17,7 @@ class DbviewsController extends AppController {
             $this->request->data['Dbview']['height'] = 300;
 
             if ($this->Dbview->save($this->request->data)) {
-                $this->redirect(array('controller' => 'dbviews', 'action' => 'edit', $this->Dbview->getLastInsertId()));
+                return $this->redirect(array('controller' => 'dbviews', 'action' => 'edit', $this->Dbview->getLastInsertId()));
             } else {
                 $this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
             }
@@ -30,11 +32,11 @@ class DbviewsController extends AppController {
     function edit($id = null) {
         if (!$id && empty($this->request->data)) {
             $this->Session->setFlash(__('Invalid widget', true));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
         if (!empty($this->request->data)) {
             if ($this->Dbview->save($this->request->data)) {
-                $this->redirect($this->referer());
+                return $this->redirect($this->referer());
             } else {
                 $this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
             }
@@ -52,7 +54,7 @@ class DbviewsController extends AppController {
 
         if (!$id && empty($this->request->data)) {
             $this->Session->setFlash(__('Invalid widget', true));
-            $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));
         }
         if (!empty($this->request->data)) {
             $dbview = $this->Dbview->read(null, $id);
@@ -72,13 +74,13 @@ class DbviewsController extends AppController {
     function delete($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Invalid id for widget', true));
-            $this->redirect($this->referer());
+            return $this->redirect($this->referer());
         }
         if ($this->Dbview->delete($id)) {
             $this->Session->setFlash(__('Widget was deleted', true));
-            $this->redirect($this->referer());
+            return $this->redirect($this->referer());
         }
         $this->Session->setFlash(__('Widget was not deleted', true));
-        $this->redirect($this->referer());
+        return $this->redirect($this->referer());
     }
 }
