@@ -17,8 +17,8 @@
             echo $this->Html->css('colorbox');
             echo $this->Html->css('topnav');
 
-            echo $this->Html->script('jquery-1.10.1');
-            echo $this->Html->script('jquery-ui-1.10.3.custom.min');
+            echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
+            echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js');
             echo $this->Html->script('jquery.colorbox-min');
 
             echo $this->Html->script('codemirror-3.14/codemirror');
