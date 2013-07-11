@@ -29,8 +29,9 @@ class AppController extends Controller {
         $this->loadModel('Dashboard');
         $this->Security->validatePost = false;
         $this->Security->csrfCheck = false;
-
-        if($this->Auth->user('id') !== null){
+        $user = $this->Auth->user();
+        $this->set('user', $user);
+        if($user !== null){
             $this->set('dblist', $this->Dashboard->find('list', array(
                 'conditions' => array(
                     'user_id' => $this->Auth->user('id')

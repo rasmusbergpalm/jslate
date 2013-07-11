@@ -5,6 +5,11 @@ class DashboardsController extends AppController {
 
     var $name = 'Dashboards';
 
+    public function beforeFilter(){
+        parent::beforeFilter();
+        $this->Auth->allow('readonly');
+    }
+
     function index() {
         $db = $this->Dashboard->find('first', array('conditions' => array('user_id' => $this->Auth->user('id'))));
         if (empty($db)) {
@@ -30,9 +35,19 @@ class DashboardsController extends AppController {
         }
     }
 
+    function readonly($public_id){
+        $dashboard = $this->Dashboard->findByPublicId($public_id);
+        if(empty($dashboard))
+            throw new NotFoundException();
+
+        $this->set('dashboard', $dashboard);
+        $this->render('view');
+    }
+
     function add() {
         if (!empty($this->request->data)) {
             $this->request->data['Dashboard']['user_id'] = $this->Auth->user('id');
+            $this->request->data['Dashboard']['public_id'] = Security::hash(openssl_random_pseudo_bytes(40));
             $this->Dashboard->create();
             if ($this->Dashboard->save($this->request->data)) {
                 $this->Session->setFlash(__('The dashboard has been saved'));
