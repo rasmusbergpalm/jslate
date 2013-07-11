@@ -1,59 +1,90 @@
-<div id="proxy_json_d3-force" style="width: 100%; height: 100%;"></div>
+<div id="${wid}" style="width: 100%; height: 100%;"></div>
 <script type="text/javascript">
-$(function(){
-var viewid = "proxy_json_d3-force";
-var w = $('#'+viewid).width(),
-    h = $('#'+viewid).height(),
-    fill = d3.scale.category20();
+    $(function () {
+        var viewid = "${wid}";
+        var w = $('#' + viewid).width(),
+                h = $('#' + viewid).height(),
+                fill = d3.scale.category20();
 
-d3.select("#"+viewid).html('');
-var vis = d3.select("#"+viewid).append("svg")
-    .attr("width", w)
-    .attr("height", h);
+        d3.select("#" + viewid).html('');
+        var vis = d3.select("#" + viewid).append("svg")
+                .attr("width", w)
+                .attr("height", h);
 
-d3.json("/proxy.php?url=http://mbostock.github.com/d3/ex/miserables.json", function(json) {
-  var force = d3.layout.force()
-      .charge(-120)
-      .linkDistance(30)
-      .nodes(json.nodes)
-      .links(json.links)
-      .size([w, h])
-      .start();
 
-  var link = vis.selectAll("line.link")
-      .data(json.links)
-    .enter().append("line")
-      .attr("class", "link")
-      .style("stroke-width", function(d) { return Math.sqrt(d.value); })
-      .attr('style','stroke-opacity: .6; stroke: #999;')
-      .attr("x1", function(d) { return d.source.x; })
-      .attr("y1", function(d) { return d.source.y; })
-      .attr("x2", function(d) { return d.target.x; })
-      .attr("y2", function(d) { return d.target.y; });
+        d3.json(proxy("http://bl.ocks.org/mbostock/raw/4062045/d89ba00bbdcc7695b63696902f0f7e95cbe3a679/miserables.json"), function (json) {
+            var force = d3.layout.force()
+                    .charge(-120)
+                    .linkDistance(30)
+                    .nodes(json.nodes)
+                    .links(json.links)
+                    .size([w, h])
+                    .start();
 
-  var node = vis.selectAll("circle.node")
-      .data(json.nodes)
-    .enter().append("circle")
-      .attr("class", "node")
-      .attr("cx", function(d) { return d.x; })
-      .attr("cy", function(d) { return d.y; })
-      .attr('style', 'stroke: #fff; stroke-width: 1.5px;')
-      .attr("r", 5)
-      .style("fill", function(d) { return fill(d.group); })
-      .call(force.drag);
+            var link = vis.selectAll("line.link")
+                    .data(json.links)
+                    .enter().append("line")
+                    .attr("class", "link")
+                    .style("stroke-width", function (d) {
+                        return Math.sqrt(d.value);
+                    })
+                    .attr('style', 'stroke-opacity: .6; stroke: #999;')
+                    .attr("x1", function (d) {
+                        return d.source.x;
+                    })
+                    .attr("y1", function (d) {
+                        return d.source.y;
+                    })
+                    .attr("x2", function (d) {
+                        return d.target.x;
+                    })
+                    .attr("y2", function (d) {
+                        return d.target.y;
+                    });
 
-  node.append("title")
-      .text(function(d) { return d.name; });
+            var node = vis.selectAll("circle.node")
+                    .data(json.nodes)
+                    .enter().append("circle")
+                    .attr("class", "node")
+                    .attr("cx", function (d) {
+                        return d.x;
+                    })
+                    .attr("cy", function (d) {
+                        return d.y;
+                    })
+                    .attr('style', 'stroke: #fff; stroke-width: 1.5px;')
+                    .attr("r", 5)
+                    .style("fill", function (d) {
+                        return fill(d.group);
+                    })
+                    .call(force.drag);
 
-  force.on("tick", function() {
-    link.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
+            node.append("title")
+                    .text(function (d) {
+                        return d.name;
+                    });
 
-    node.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
-  });
-});
-});
+            force.on("tick", function () {
+                link.attr("x1", function (d) {
+                    return d.source.x;
+                })
+                        .attr("y1", function (d) {
+                            return d.source.y;
+                        })
+                        .attr("x2", function (d) {
+                            return d.target.x;
+                        })
+                        .attr("y2", function (d) {
+                            return d.target.y;
+                        });
+
+                node.attr("cx", function (d) {
+                    return d.x;
+                })
+                        .attr("cy", function (d) {
+                            return d.y;
+                        });
+            });
+        });
+    });
 </script>

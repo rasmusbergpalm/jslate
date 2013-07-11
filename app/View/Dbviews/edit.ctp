@@ -19,7 +19,7 @@
     }
 </style>
 <h2>Create your widget</h2>
-<span id="autosaved">Auto-save <input id="autosaved_check" type="checkbox"/></span>
+<span id="autosaved">Auto-save <input id="autosaved_check" type="checkbox" checked="checked"/></span>
 <input type="button" onclick="updatePreviewAndSave()" value="Save"/>
 
 <div style='width:50%; text-align: center;'>Code</div>
@@ -64,17 +64,17 @@ var code = CodeMirror.fromTextArea(document.getElementById('code'), {
     });
 
 code.on('change', function() {
-        if ($('#autosaved_check').is(':checked')) {
-            clearTimeout(delay);
-            delay = setTimeout(updatePreviewAndSave, 1000);
-        }
-    });
+    if ($('#autosaved_check').is(':checked')) {
+        clearTimeout(delay);
+        delay = setTimeout(updatePreviewAndSave, 1000);
+    }
+});
 
 
 function updatePreviewAndSave() {
     code.save();
     $.post("<?php echo $this->Html->url(array('controller'=>'dbviews','action'=>'edit', $this->data['Dbview']['id'])); ?>", $("#DbviewEditForm").serialize());
-    $('#preview').html(code.getValue().replace(/\$\{wid\}/g, '1'));
+    $('#preview').html(code.getValue().replace(/\$\{wid\}/g, 'id1'));
 }
 setTimeout(updatePreviewAndSave, 300);
 

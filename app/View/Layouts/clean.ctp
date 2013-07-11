@@ -34,7 +34,7 @@
 
             echo $this->Html->script('highstock');
             echo $this->Html->script('gray');
-            
+
             echo $this->Html->script('d3/d3');
             echo $this->Html->script('d3/d3.csv');
             echo $this->Html->script('d3/d3.chart');
@@ -42,40 +42,44 @@
             echo $this->Html->script('d3/d3.geom');
             echo $this->Html->script('d3/d3.layout');
             echo $this->Html->script('d3/d3.time');
-            
+
             echo $scripts_for_layout;
         ?>
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    $('.cbox').colorbox();
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.cbox').colorbox();
 
-                    window.setTimeout(function(){
-                        $('#flashMessage').toggle('slow');
-                        $('#authMessage').toggle('slow');
-                    }, 5000);
+                window.setTimeout(function(){
+                    $('#flashMessage').toggle('slow');
+                    $('#authMessage').toggle('slow');
+                }, 5000);
 
-                    $("ul.subnav").parent().append("<span></span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
+                $("ul.subnav").parent().append("<span></span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
 
-                    $("ul.topnav li span").click(function() { //When trigger is clicked...
+                $("ul.topnav li span").click(function() { //When trigger is clicked...
 
-                        //Following events are applied to the subnav itself (moving subnav up and down)
-                        $(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
+                    //Following events are applied to the subnav itself (moving subnav up and down)
+                    $(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
 
-                        $(this).parent().hover(function() {
-                        }, function(){
-                            $(this).parent().find("ul.subnav").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
-                        });
-
-                        //Following events are applied to the trigger (Hover events for the trigger)
-                    }).hover(function() {
-                        $(this).addClass("subhover"); //On hover over, add class "subhover"
-                    }, function(){	//On Hover Out
-                        $(this).removeClass("subhover"); //On hover out, remove class "subhover"
+                    $(this).parent().hover(function() {
+                    }, function(){
+                        $(this).parent().find("ul.subnav").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
                     });
 
+                    //Following events are applied to the trigger (Hover events for the trigger)
+                }).hover(function() {
+                    $(this).addClass("subhover"); //On hover over, add class "subhover"
+                }, function(){	//On Hover Out
+                    $(this).removeClass("subhover"); //On hover out, remove class "subhover"
                 });
 
-            </script>
+            });
+
+            function proxy(url){
+                return <?php echo h(Router::url('/')) ?>+'proxy.php?url='+url;
+            }
+
+        </script>
         <script type="text/javascript">
 
           var _gaq = _gaq || [];
@@ -99,7 +103,7 @@
             <div id="header">
                 <?php if (!empty($dashboard_id)): ?>
                 <span style="float: left; color: white;">
-                    <ul class="topnav">    
+                    <ul class="topnav">
                         <li>
                             <?php
                                 echo $this->Html->link($dblist[$dashboard_id], array('controller' => 'dashboards', 'action' => 'view', $dashboard_id));
@@ -112,7 +116,7 @@
                                 ?>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </span>
                 <span style="float: right; color: white; margin-right: 60px;">
