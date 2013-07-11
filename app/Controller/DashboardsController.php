@@ -61,6 +61,7 @@ class DashboardsController extends AppController {
     function edit($id = null) {
         if ($id && $this->Dashboard->belongsToUser($id, $this->Auth->user('id'))) {
             if (!empty($this->request->data)) {
+                $this->request->data['Dashboard']['id'] = $id;
                 if ($this->Dashboard->save($this->request->data)) {
                     $this->Session->setFlash(__('The dashboard has been saved'));
                     return $this->redirect($this->referer());

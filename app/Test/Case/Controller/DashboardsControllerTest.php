@@ -18,14 +18,16 @@ class DashboardsControllerTest extends AuthMocker {
             'Dashboard' => array(
                 'id' => 1,
                 'name' => 'foo',
-                'user_id' => 2
+                'user_id' => 2,
+                'public_id' => Security::hash(uniqid())
             )
         ));
         $this->controller->Dashboard->save(array(
             'Dashboard' => array(
                 'id' => 2,
                 'name' => 'bar',
-                'user_id' => 1
+                'user_id' => 1,
+                'public_id' => Security::hash(uniqid())
             )
         ));
         $this->login(array('id' => 1, 'email' => 'foo'));
@@ -48,7 +50,8 @@ class DashboardsControllerTest extends AuthMocker {
             'Dashboard' => array(
                 'id' => 1,
                 'name' => $name,
-                'user_id' => 1
+                'user_id' => 1,
+                'public_id' => Security::hash(uniqid())
             )
         ));
         $this->login(array('id' => 1, 'email' => 'foo'));
@@ -61,7 +64,8 @@ class DashboardsControllerTest extends AuthMocker {
             'Dashboard' => array(
                 'id' => 1,
                 'name' => uniqid(),
-                'user_id' => 2
+                'user_id' => 2,
+                'public_id' => Security::hash(uniqid())
             )
         ));
         $this->login(array('id'=>1, 'email'=>'foo'));
@@ -108,7 +112,8 @@ class DashboardsControllerTest extends AuthMocker {
             'Dashboard' => array(
                 'id' => 1,
                 'name' => $name,
-                'user_id' => 2
+                'user_id' => 2,
+                'public_id' => Security::hash(uniqid())
             )
         ));
         $this->login(array('id'=>1, 'email'=>'foo'));
@@ -120,20 +125,20 @@ class DashboardsControllerTest extends AuthMocker {
         $name = uniqid();
         $this->controller->Dashboard->save(array(
             'Dashboard' => array(
-                'id' => 1,
+                'id' => 2,
                 'name' => $name,
-                'user_id' => 1
+                'user_id' => 1,
+                'public_id' => Security::hash(uniqid())
             )
         ));
         $this->login(array('id'=>1, 'email'=>'foo'));
         $newName = 'new name';
-        $this->testAction('/dashboards/edit/1', array('data' => array(
+        $this->testAction('/dashboards/edit/2', array('data' => array(
             'Dashboard' => array(
-                'id' => 1,
                 'name' => $newName
             )
         ), 'method' => 'post'));
-        $dashboard = $this->controller->Dashboard->find('first');
+        $dashboard = $this->controller->Dashboard->findById(2);
         $this->assertEqual($newName, $dashboard['Dashboard']['name']);
     }
 
@@ -143,7 +148,8 @@ class DashboardsControllerTest extends AuthMocker {
             'Dashboard' => array(
                 'id' => 1,
                 'name' => $name,
-                'user_id' => 2
+                'user_id' => 2,
+                'public_id' => Security::hash(uniqid())
             )
         ));
         $this->login(array('id'=>1, 'email'=>'foo'));
@@ -163,7 +169,8 @@ class DashboardsControllerTest extends AuthMocker {
             'Dashboard' => array(
                 'id' => 1,
                 'name' => 'name',
-                'user_id' => 1
+                'user_id' => 1,
+                'public_id' => Security::hash(uniqid())
             )
         ));
         $this->login(array('id'=>1, 'email'=>'foo'));
@@ -174,7 +181,7 @@ class DashboardsControllerTest extends AuthMocker {
 
     public function testDeleteNotYourOwnRedirectsToIndex() {
         $name = uniqid();
-        $dashboard = array('id' => 1, 'name' => $name, 'user_id' => 2);
+        $dashboard = array('id' => 1, 'name' => $name, 'user_id' => 2, 'public_id' => Security::hash(uniqid()));
         $this->controller->Dashboard->save(array(
             'Dashboard' => $dashboard
         ));
