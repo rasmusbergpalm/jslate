@@ -5,20 +5,19 @@ foreach ($dashboard['Dbview'] as $dbview){
     $id = $dbview['id'];
     $wid = 'id-'.String::uuid();
     $code = str_replace('${wid}', $wid, $dbview['code']);
-    $style = $user == null ? 'style="cursor:auto;"' : '';
+    $style = $user == null ? 'cursor:auto' : '';
     echo "<textarea id='code$id' style='display: none;'>$code</textarea>";
-    echo "<div class='dragbox' id='dragbox_$id'
-        style=' overflow: hidden; position: absolute; z-index: $zid; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>
-            <div class='header' $style>
-                <span>&nbsp;";
+    echo "<div class='well dragbox' id='dragbox_$id' style='overflow: hidden; position: absolute; z-index: $zid; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>";
+    echo "<div class='header' style='margin-top: -14px; $style'>";
+    echo "<span>&nbsp;";
     if($user != null){
         echo $this->Html->link('x', "/dbviews/delete/$id", array('style' =>'float: right; margin-left: 10px;'), 'Are you sure you want to remove this widget?');
         echo $this->Html->link('edit', "/dbviews/edit/$id", array('style' =>'float: right;'));
     }
     echo "</span>";
-    echo "</div>
-            <div class='dragbox-content' id='view$id' style='clear: both; width: ".($dbview['width']-10)."px; height: ".($dbview['height']-30)."px;'>$code</div>
-        </div>";
+    echo "</div>";
+    echo "<div class='dragbox-content' id='view$id' style='clear: both; width: ".($dbview['width'])."px; height: ".($dbview['height']-8)."px;'>$code</div>";
+    echo "</div>";
 }
 ?>
 <?php if($user != null): ?>
@@ -26,7 +25,7 @@ foreach ($dashboard['Dbview'] as $dbview){
     $(function(){
         $(".dragbox").draggable({
             handle: ".header",
-            grid: [10, 10],
+            grid: [50, 50],
             stop: function(event, ui){
                 var id = ui.helper.context.id.split('_')[1];
                 $.ajax({
@@ -39,7 +38,7 @@ foreach ($dashboard['Dbview'] as $dbview){
             }
         });
         $(".dragbox").resizable({
-            grid: [10, 10],
+            grid: [50, 50],
             stop: function(event, ui){
 
                 var id = ui.helper.context.id.split('_')[1];
@@ -48,8 +47,8 @@ foreach ($dashboard['Dbview'] as $dbview){
                     url: "<?php echo $this->Html->url('/dbviews/update/')?>"+id,
                     data: {data:{width: ui.size.width, height: ui.size.height}},
                     success: function(msg){
-                        $('#view'+id).height((ui.size.height-30)+'px')
-                        $('#view'+id).width((ui.size.width-10)+'px')
+                        $('#view'+id).height((ui.size.height-8)+'px')
+                        $('#view'+id).width((ui.size.width)+'px')
                         $('#view'+id).html($('#code'+id).val())
                     }
                 });

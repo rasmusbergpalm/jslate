@@ -1,0 +1,19 @@
+.alert {
+    position: fixed;
+    top: 0;
+    padding: 5px;
+    z-index: 999;
+    width: 400px;
+    left: 50%;
+    margin-left: -200px;
+    display: none;
+    text-align: center;
+}
+
+.dragbox .header{
+    cursor: move;
+}
+
+.body {
+    background: #202020;
+}

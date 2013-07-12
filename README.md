@@ -27,12 +27,6 @@ jSlate provides a php proxy so the widgets can request data from off-site locati
  - Move the SQL files back
  - You can now safely run ```cake migrate``` in the future.
 
-# Known issues
-
-The templates using proxy.php expect jslate to run on the root, i.e. localhost/
-
-If you are running in a subfolder you'll need to adjust the reference to /proxy.php to jslate/proxy.php
-
 # Licensing
 
 Copyright (C) 2013 Rasmus Berg Palm

@@ -11,9 +11,9 @@ class DbviewsController extends AppController {
             $this->request->data['Dbview']['name'] = $template;
             $this->request->data['Dbview']['code'] = file_get_contents(APP . 'templates' . DS . $template);
             $this->request->data['Dbview']['dashboard_id'] = $dashboard_id;
-            $this->request->data['Dbview']['left'] = 100;
-            $this->request->data['Dbview']['top'] = 100;
-            $this->request->data['Dbview']['width'] = 400;
+            $this->request->data['Dbview']['left'] = 12;
+            $this->request->data['Dbview']['top'] = 52;
+            $this->request->data['Dbview']['width'] = 300;
             $this->request->data['Dbview']['height'] = 300;
 
             if ($this->Dbview->save($this->request->data)) {
@@ -77,7 +77,6 @@ class DbviewsController extends AppController {
             return $this->redirect($this->referer());
         }
         if ($this->Dbview->delete($id)) {
-            $this->Session->setFlash(__('Widget was deleted', true));
             return $this->redirect($this->referer());
         }
         $this->Session->setFlash(__('Widget was not deleted', true));

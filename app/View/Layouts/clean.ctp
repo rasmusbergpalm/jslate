@@ -7,19 +7,19 @@
         </title>
         <?php
             echo $this->Html->meta('icon');
-
-            echo $this->Html->css('clean');
+            echo $this->Html->css('bootstrap.min');
+            echo $this->Html->css('bootstrap-responsive.min');
+            echo $this->Html->css('darkstrap-v0.9.0');
             echo $this->Html->css('jquery-ui');
+            echo $this->Html->css('style');
 
             echo $this->Html->css('codemirror-3.14/codemirror');
             echo $this->Html->css('codemirror-3.14/ambiance');
             echo $this->Html->css('codemirror-3.14/hint/show-hint');
-            echo $this->Html->css('colorbox');
-            echo $this->Html->css('topnav');
 
             echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
             echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js');
-            echo $this->Html->script('jquery.colorbox-min');
+            echo $this->Html->script('bootstrap.min');
 
             echo $this->Html->script('codemirror-3.14/codemirror');
             echo $this->Html->script('codemirror-3.14/javascript');
@@ -47,41 +47,14 @@
         ?>
         <script type="text/javascript">
             $(document).ready(function(){
-                $('.cbox').colorbox();
-
-                window.setTimeout(function(){
-                    $('#flashMessage').toggle('slow');
-                    $('#authMessage').toggle('slow');
-                }, 5000);
-
-                $("ul.subnav").parent().append("<span></span>"); //Only shows drop down trigger when js is enabled (Adds empty span tag after ul.subnav*)
-
-                $("ul.topnav li span").click(function() { //When trigger is clicked...
-
-                    //Following events are applied to the subnav itself (moving subnav up and down)
-                    $(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
-
-                    $(this).parent().hover(function() {
-                    }, function(){
-                        $(this).parent().find("ul.subnav").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
-                    });
-
-                    //Following events are applied to the trigger (Hover events for the trigger)
-                }).hover(function() {
-                    $(this).addClass("subhover"); //On hover over, add class "subhover"
-                }, function(){	//On Hover Out
-                    $(this).removeClass("subhover"); //On hover out, remove class "subhover"
-                });
-
+                $('.flashMessage').fadeIn(500).delay(5000).fadeOut(1000);
             });
-
             function proxy(url){
                 return <?php echo h(Router::url('/')) ?>+'proxy.php?url='+url;
             }
 
         </script>
         <script type="text/javascript">
-
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-28317188-1']);
           _gaq.push(['_setDomainName', 'jslate.com']);
@@ -92,58 +65,41 @@
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
           })();
-
         </script>
 
-        </head>
+    </head>
 
-        <body>
-            <?php echo $this->Session->flash(); ?>
-            <?php echo $this->Session->flash('auth'); ?>
-            <div id="header">
-                <?php if (!empty($dashboard_id)): ?>
-                <span style="float: left; color: white;">
-                    <ul class="topnav">
-                        <li>
-                            <?php
-                                echo $this->Html->link($dblist[$dashboard_id], array('controller' => 'dashboards', 'action' => 'view', $dashboard_id));
-                            ?>
-                            <ul class="subnav">
+    <body>
+        <?php echo $this->Session->flash(); ?>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li class="active"><?php echo $this->Html->link($dblist[$dashboard_id], array('controller' => 'dashboards', 'action' => 'view', $dashboard_id)); ?></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboards <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><?php echo $this->Html->link('Add dashboard', array('controller'=>'dashboards', 'action'=>'add')); ?></li>
+                                <li class="divider"></li>
                                 <?php
-                                foreach ($dblist as $id => $name) {
-                                    echo "<li>" . $this->Html->link($name, '/dashboards/view/' . $id) . "</li>";
-                                }
+                                    foreach ($dblist as $id => $name) {
+                                        echo "<li>" . $this->Html->link($name, '/dashboards/view/' . $id) . "</li>";
+                                    }
                                 ?>
                             </ul>
                         </li>
-
                     </ul>
-                </span>
-                <span style="float: right; color: white; margin-right: 60px;">
-                    <ul class="topnav">
-
-                            <li><?php echo $this->Html->link($this->Html->image("add.png", array('style'=>'width: 32px; margin-top:-8px; float: left;')).' Create widget', '/dbviews/add/' . $dashboard_id, array('escape' =>false)); ?></li>
-                            <li>
-                                <a>Config<?php echo $this->Html->image("config.png", array('style'=>'width: 32px; margin-top:-8px; float: left;')); ?> </a>
-                                <ul class="subnav">
-                                    <li><?php echo $this->Html->link('Add dashboard', "/dashboards/add/", array('class' => 'cbox')); ?></li>
-                                    <li><?php echo $this->Html->link('Edit dashboard', "/dashboards/edit/$dashboard_id", array('class' => 'cbox')); ?></li>
-                                </ul>
-                            </li>
-
+                    <ul class="nav pull-right">
+                        <li><?php echo $this->Html->link('Edit dashboard', '/dashboards/edit/'.$dashboard_id, array('class'=>'')); ?></li>
+                        <li class="divider-vertical"></li>
+                        <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary pull-right', 'escape'=>false)); ?></div></li>
                     </ul>
-                </span>
-                <?php endif ?>
-            </div>
-
-
-
-        <div id="content">
-            <div id="wrap">
-                <?php echo $content_for_layout; ?>
-            </div>
+                </div>
+            </div><!-- /navbar-inner -->
         </div>
-        <?php echo $this->element('sql_dump'); ?>
+        <div class="container" id="content">
+            <?php echo $content_for_layout; ?>
+        </div>
     </body>
 </html>
 
