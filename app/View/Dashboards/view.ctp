@@ -3,7 +3,7 @@ $zid=1;
 foreach ($dashboard['Dbview'] as $dbview){
     $zid++;
     $id = $dbview['id'];
-    $wid = 'id-'.String::uuid();
+    $wid = 'id_'.uniqid();
     $code = str_replace('${wid}', $wid, $dbview['code']);
     $style = $user == null ? 'style="cursor:auto;"' : '';
     echo "<textarea id='code$id' style='display: none;'>$code</textarea>";
