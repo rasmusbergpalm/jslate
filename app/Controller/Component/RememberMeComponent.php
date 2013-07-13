@@ -24,7 +24,7 @@ class RememberMeComponent extends Component {
         if (!is_array($cookie) || $this->Auth->user()) return;
 
         if ($this->Auth->login($cookie)) {
-            $this->Cookie->write($this->cookieName, $cookie, false, $this->period);
+            $this->Cookie->write($this->cookieName, $cookie, true, $this->period);
         } else {
             $this->delete();
         }

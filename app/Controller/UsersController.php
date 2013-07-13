@@ -12,6 +12,7 @@ class UsersController extends AppController {
     }
 
     function logout() {
+        $this->RememberMe->delete();
         return $this->redirect($this->Auth->logout());
     }
 
