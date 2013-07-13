@@ -17,7 +17,7 @@ class DbviewsController extends AppController {
             $this->request->data['Dbview']['height'] = 300;
 
             if ($this->Dbview->save($this->request->data)) {
-                return $this->redirect(array('controller' => 'dbviews', 'action' => 'edit', $this->Dbview->getLastInsertId()));
+                return $this->redirect(array('controller' => 'dashboards', 'action' => 'view', $dashboard_id));
             } else {
                 $this->Session->setFlash(__('The widget could not be saved. Please, try again.', true));
             }
