@@ -7,11 +7,11 @@ foreach ($dashboard['Dbview'] as $dbview){
     $code = str_replace('${wid}', $wid, $dbview['code']);
     $style = $user == null ? 'cursor:auto' : '';
     echo "<textarea id='code$id' style='display: none;'>$code</textarea>";
-    echo "<div class='well dragbox' id='dragbox_$id' style='overflow: hidden; position: absolute; z-index: $zid; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>";
-    echo "<div class='header' style='margin-top: -14px; $style'>";
+    echo "<div class='well dragbox' id='dragbox_$id' style='z-index: $zid; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>";
+    echo "<div class='header' style='$style'>";
     echo "<span>&nbsp;";
     if($user != null){
-        echo $this->Html->link('x', "/dbviews/delete/$id", array('style' =>'float: right; margin-left: 10px;'), 'Are you sure you want to remove this widget?');
+        echo $this->Html->link('delete', "/dbviews/delete/$id", array('style' =>'float: right; margin-left: 10px;'), 'Are you sure you want to remove this widget?');
         echo $this->Html->link('edit', "/dbviews/edit/$id", array('style' =>'float: right;'));
     }
     echo "</span>";

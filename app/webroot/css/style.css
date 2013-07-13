@@ -9,7 +9,25 @@
     display: none;
     text-align: center;
 }
+.dragbox {
+    overflow: hidden;
+    position: absolute;
+}
 
 .dragbox .header{
+    opacity: 0;
     cursor: move;
+    margin-top: -16px;
+    transition: opacity .1s ease-in-out;
+    -moz-transition: opacity .1s ease-in-out;
+    -webkit-transition: opacity .1s ease-in-out;
+}
+.dragbox:hover .header {
+    opacity: 1;
+}
+
+.CodeMirror pre{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }

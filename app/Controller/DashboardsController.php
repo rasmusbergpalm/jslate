@@ -23,7 +23,7 @@ class DashboardsController extends AppController {
     function view($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Invalid dashboard.'), 'error');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect('/');
         }
         $dashboard = $this->Dashboard->read(null, $id);
         if (!empty($dashboard) && $dashboard['Dashboard']['user_id'] == $this->Auth->user('id')) {
@@ -31,7 +31,7 @@ class DashboardsController extends AppController {
             $this->set('dashboard', $dashboard);
         } else {
             $this->Session->setFlash('Invalid dashboard.', 'error');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect('/');
         }
     }
 
@@ -61,19 +61,18 @@ class DashboardsController extends AppController {
         if ($id && $this->Dashboard->belongsToUser($id, $this->Auth->user('id'))) {
             if (!empty($this->request->data)) {
                 $this->request->data['Dashboard']['id'] = $id;
-                if ($this->Dashboard->save($this->request->data)) {
-                    return $this->redirect($this->referer());
-                } else {
+                if (!$this->Dashboard->save($this->request->data)) {
                     $this->Session->setFlash(__('The dashboard could not be saved.'), 'error');
                 }
+                return $this->redirect($this->referer());
             }
-            if (empty($this->request->data)) {
+            else {
                 $this->set('dashboard_id', $id);
                 $this->request->data = $this->Dashboard->read(null, $id);
             }
         } else {
             $this->Session->setFlash(__('Invalid dashboard.'), 'error');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect('/');
         }
     }
 
@@ -81,13 +80,13 @@ class DashboardsController extends AppController {
     function delete($id = null) {
         if ($id && $this->Dashboard->belongsToUser($id, $this->Auth->user('id'))) {
             if ($this->Dashboard->delete($id)) {
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect('/');
             }
             $this->Session->setFlash(__('Dashboard could not be deleted.'), 'error');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect('/');
         } else {
             $this->Session->setFlash(__('Invalid dashboard.'), 'error');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect('/');
         }
     }
 }

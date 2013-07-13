@@ -1,41 +1,37 @@
 <style type="text/css">
-    #code_outer {
-        float: left;
-        width: 50%;
-        border-right: 2px dashed gray;
-    }
     .CodeMirror {
         height: auto;
         width: 100%;
     }
-
     #preview_outer {
-        width: 49%;
         position: fixed;
-        margin-top:-16px;
-        left: 51%;
+        left: 50%;
         height: 600px;
-        border: 1px solid black;
     }
 </style>
-<h2>Create your widget</h2>
-<span id="autosaved">Auto-save <input id="autosaved_check" type="checkbox" checked="checked"/></span>
-<input type="button" onclick="updatePreviewAndSave()" value="Save"/>
+<h2>Create widget</h2>
+<div class="form-inline">
+    <label class="checkbox"><input id="autosave" type="checkbox" checked="checked" onclick="$('#save').toggle();"/> Auto-save</label>
+    <button id="save" class="btn btn-small" style="display: none;" onclick="updatePreviewAndSave()">Save</button>
+</div>
 
-<div style='width:50%; text-align: center;'>Code</div>
-<div id='code_outer'>
-<?php echo $this->Form->create('Dbview');?>
-    <?php
+<div class="row">
+    <div class="span6">
+        <span>Code</span>
+        <?php echo $this->Form->create('Dbview');?>
+        <?php
         echo $this->Form->input('id', array('label'=>false));
         echo $this->Form->input('code', array('id'=>'code','label'=>false));
-    ?>
-<?php echo $this->Form->end();?>
-</div>
-<div id="preview_outer">
-    <div style='width:100%; text-align: center;'>Preview</div>
-    <div id="preview">
-        Loading...
+        ?>
+        <?php echo $this->Form->end();?>
     </div>
+    <div id="preview_outer" class="span6">
+        <span>Preview</span>
+        <div id="preview" class="well">
+            Loading...
+        </div>
+    </div>
+
 </div>
 
 <script type="text/javascript">
@@ -64,7 +60,7 @@ var code = CodeMirror.fromTextArea(document.getElementById('code'), {
     });
 
 code.on('change', function() {
-    if ($('#autosaved_check').is(':checked')) {
+    if ($('#autosave').is(':checked')) {
         clearTimeout(delay);
         delay = setTimeout(updatePreviewAndSave, 1000);
     }
@@ -73,8 +69,9 @@ code.on('change', function() {
 
 function updatePreviewAndSave() {
     code.save();
-    $.post("<?php echo $this->Html->url(array('controller'=>'dbviews','action'=>'edit', $this->data['Dbview']['id'])); ?>", $("#DbviewEditForm").serialize());
-    $('#preview').html(code.getValue().replace(/\$\{wid\}/g, 'id_1'));
+    $.post("<?php echo $this->Html->url(array('controller'=>'dbviews','action'=>'edit', $this->data['Dbview']['id'])); ?>", $("#DbviewEditForm").serialize(), function(){
+        $('#preview').html(code.getValue().replace(/\$\{wid\}/g, 'id_1'));
+    });
 }
 setTimeout(updatePreviewAndSave, 300);
 

@@ -2,43 +2,32 @@
 class User extends AppModel {
 	var $name = 'User';
 	var $displayField = 'email';
+
 	var $validate = array(
 		'email' => array(
 			'email' => array(
 				'rule' => array('email'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'required' => true,
+                'message' => 'The email address must be a valid email address'
 			),
+            'unique' => array(
+                'rule' => 'isUnique',
+                'message' => 'The email address is already in use'
+            ),
 		),
 		'password' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'required' => true,
+                'message' => 'The password cannot be empty'
 			),
 		),
 	);
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
 		'Dashboard' => array(
 			'className' => 'Dashboard',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+			'foreignKey' => 'user_id'
 		)
 	);
     

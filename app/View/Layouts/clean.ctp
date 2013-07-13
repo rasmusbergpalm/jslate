@@ -71,7 +71,6 @@
 
     <body>
         <?php echo $this->Session->flash(); ?>
-
         <div class="navbar">
             <div class="navbar-inner">
                 <?php if(!empty($dashboard_id)): ?>
