@@ -31,3 +31,7 @@
     -moz-box-shadow: none;
     box-shadow: none;
 }
+
+.CodeMirror {
+    font-size: 12px;
+}

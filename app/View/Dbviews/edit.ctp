@@ -9,7 +9,7 @@
         height: 600px;
     }
 </style>
-<h2>Create widget</h2>
+<h2>Edit widget</h2>
 <div class="form-inline">
     <label class="checkbox"><input id="autosave" type="checkbox" checked="checked" onclick="$('#save').toggle();"/> Auto-save</label>
     <button id="save" class="btn btn-small" style="display: none;" onclick="updatePreviewAndSave()">Save</button>
