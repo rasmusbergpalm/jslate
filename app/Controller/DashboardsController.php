@@ -13,7 +13,7 @@ class DashboardsController extends AppController {
     function index() {
         $db = $this->Dashboard->find('first', array('conditions' => array('user_id' => $this->Auth->user('id'))));
         if (empty($db)) {
-            $this->request->data['Dashboard']['name'] = 'New Dashboard';
+            $this->request->data['Dashboard']['name'] = 'My Dashboard';
             $this->add();
         } else {
             return $this->redirect(array('action' => 'view', $db['Dashboard']['id']));
