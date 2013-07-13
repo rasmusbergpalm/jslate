@@ -71,8 +71,10 @@
 
     <body>
         <?php echo $this->Session->flash(); ?>
+
         <div class="navbar">
             <div class="navbar-inner">
+                <?php if(!empty($dashboard_id)): ?>
                 <div class="container">
                     <ul class="nav">
                         <li class="active"><?php echo $this->Html->link($dblist[$dashboard_id], array('controller' => 'dashboards', 'action' => 'view', $dashboard_id)); ?></li>
@@ -95,8 +97,10 @@
                         <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary pull-right', 'escape'=>false)); ?></div></li>
                     </ul>
                 </div>
+                <?php endif; ?>
             </div><!-- /navbar-inner -->
         </div>
+
         <div class="container" id="content">
             <?php echo $content_for_layout; ?>
         </div>

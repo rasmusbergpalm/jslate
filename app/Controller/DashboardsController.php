@@ -68,6 +68,7 @@ class DashboardsController extends AppController {
                 }
             }
             if (empty($this->request->data)) {
+                $this->set('dashboard_id', $id);
                 $this->request->data = $this->Dashboard->read(null, $id);
             }
         } else {
