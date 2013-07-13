@@ -50,7 +50,7 @@
                 $('.flashMessage').fadeIn(500).delay(5000).fadeOut(1000);
             });
             function proxy(url){
-                return <?php echo h(Router::url('/')) ?>+'proxy.php?url='+url;
+                return <?php echo h(Router::url('/')) ?>+'proxy.php?url='+encodeURIComponent(url);
             }
 
         </script>

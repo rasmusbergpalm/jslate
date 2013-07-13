@@ -74,7 +74,7 @@ code.on('change', function() {
 function updatePreviewAndSave() {
     code.save();
     $.post("<?php echo $this->Html->url(array('controller'=>'dbviews','action'=>'edit', $this->data['Dbview']['id'])); ?>", $("#DbviewEditForm").serialize());
-    $('#preview').html(code.getValue().replace(/\$\{wid\}/g, 'id1'));
+    $('#preview').html(code.getValue().replace(/\$\{wid\}/g, 'id_1'));
 }
 setTimeout(updatePreviewAndSave, 300);
 
