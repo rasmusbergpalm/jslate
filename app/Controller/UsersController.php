@@ -26,6 +26,11 @@ class UsersController extends AppController {
     function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
+                if (empty($this->data['User']['remember_me'])) {
+                    $this->RememberMe->delete();
+                } else {
+                    $this->RememberMe->remember($this->Auth->user('id'), $this->data['User']['email'], $this->data['User']['password']);
+                }
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again.'),'error');

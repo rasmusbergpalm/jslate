@@ -188,6 +188,7 @@
  *
  */
 	Configure::write('Session', array(
+        'timeout' => 525949,
 		'defaults' => 'php'
 	));
 
