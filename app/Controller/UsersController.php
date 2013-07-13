@@ -6,13 +6,21 @@ class UsersController extends AppController {
     var $name = 'Users';
 
     function  beforeFilter() {
-        $this->Auth->allow('add');
+        $this->Auth->allow('add','demo');
         parent::beforeFilter();
 
     }
 
     function logout() {
         return $this->redirect($this->Auth->logout());
+    }
+
+    function demo(){
+        $this->request->data['User']['email'] = uniqid().'@mailinator.com';
+        $password = uniqid();
+        $this->request->data['User']['password'] = $password;
+        $this->request->data['User']['password2'] = $password;
+        $this->add();
     }
 
     function login() {
