@@ -90,11 +90,13 @@
                             </ul>
                         </li>
                     </ul>
-                    <ul class="nav pull-right">
-                        <li><?php echo $this->Html->link('Edit dashboard', '/dashboards/edit/'.$dashboard_id, array('class'=>'')); ?></li>
-                        <li class="divider-vertical"></li>
-                        <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary pull-right', 'escape'=>false)); ?></div></li>
-                    </ul>
+                    <?php if(strpos($this->here, 'dashboards/view') !== false): ?>
+                        <ul class="nav pull-right">
+                            <li><?php echo $this->Html->link('Edit dashboard', '/dashboards/edit/'.$dashboard_id); ?></li>
+                            <li class="divider-vertical"></li>
+                            <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary pull-right', 'escape'=>false)); ?></div></li>
+                        </ul>
+                    <?php endif; ?>
                 </div>
                 <?php endif; ?>
             </div><!-- /navbar-inner -->
