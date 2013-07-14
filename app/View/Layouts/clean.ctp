@@ -73,10 +73,12 @@
         <?php echo $this->Session->flash(); ?>
         <div class="navbar">
             <div class="navbar-inner">
-                <?php if(!empty($dashboard_id)): ?>
                 <div class="container">
+                    <?php if(!empty($dblist)): ?>
                     <ul class="nav">
+                        <?php if(!empty($dashboard_id)): ?>
                         <li class="active"><?php echo $this->Html->link($dblist[$dashboard_id], array('controller' => 'dashboards', 'action' => 'view', $dashboard_id)); ?></li>
+                        <?php endif; ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboards <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -90,15 +92,22 @@
                             </ul>
                         </li>
                     </ul>
-                    <?php if(strpos($this->here, 'dashboards/view') !== false): ?>
-                        <ul class="nav pull-right">
+                    <?php endif; ?>
+                    <ul class="nav pull-right">
+                        <?php if(empty($user)): ?>
+                            <li><div><?php echo $this->Html->link('Sign in', '/users/login/', array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
+                        <?php elseif(strpos($this->here, 'dashboards/view') !== false): ?>
                             <li><?php echo $this->Html->link('Edit dashboard', '/dashboards/edit/'.$dashboard_id); ?></li>
                             <li class="divider-vertical"></li>
-                            <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary pull-right', 'escape'=>false)); ?></div></li>
-                        </ul>
-                    <?php endif; ?>
+                            <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
+                        <?php endif; ?>
+                        <?php if(@strpos($user['email'],'jSlateDemoUser')!==false): ?>
+                            <li class="divider-vertical"></li>
+                            <li><div><?php echo $this->Html->link('<i class="icon-arrow-right icon-white"></i> Sign up', '/users/edit/', array('class'=>'btn btn-success', 'escape'=>false)); ?></div></li>
+                        <?php endif; ?>
+                    </ul>
                 </div>
-                <?php endif; ?>
+
             </div><!-- /navbar-inner -->
         </div>
 

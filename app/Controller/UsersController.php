@@ -6,7 +6,7 @@ class UsersController extends AppController {
     var $name = 'Users';
 
     function  beforeFilter() {
-        $this->Auth->allow('add','demo');
+        $this->Auth->allow('login','add','demo');
         parent::beforeFilter();
 
     }
@@ -17,15 +17,15 @@ class UsersController extends AppController {
     }
 
     function demo(){
-        $this->request->data['User']['email'] = uniqid().'@mailinator.com';
+        $this->request->data['User']['email'] = 'jSlateDemoUser'.uniqid().'@mailinator.com';
         $password = uniqid();
         $this->request->data['User']['password'] = $password;
         $this->request->data['User']['password2'] = $password;
-        $this->add();
+        return $this->add();
     }
 
     function login() {
-        if ($this->request->is('post')) {
+        if (!empty($this->request->data)) {
             if ($this->Auth->login()) {
                 if (empty($this->data['User']['remember_me'])) {
                     $this->RememberMe->delete();
@@ -39,24 +39,42 @@ class UsersController extends AppController {
         }
     }
 
+    function edit() {
+        $id = $this->Auth->user('id');
+        if(empty($id)) throw new NotFoundException();
+
+        if (!empty($this->request->data)) {
+            if ($this->request->data['User']['password'] != $this->request->data['User']['password2']) {
+                $this->Session->setFlash('The provided passwords did not match. Please try again.','error');
+            } else {
+                $this->request->data['User']['id'] = $id;
+                if (!$this->User->save($this->request->data)) {
+                    $this->Session->setFlash(__('You user could not be updated.'), 'error');
+                } else {
+                    return $this->login();
+                }
+            }
+        }
+
+        @$this->request->data['User']['password'] = '';
+        @$this->request->data['User']['password2'] = '';
+    }
+
     function add() {
         if (!empty($this->request->data)) {
-            if ($this->request->data['User']['password'] == $this->request->data['User']['password2']) {
+            if ($this->request->data['User']['password'] != $this->request->data['User']['password2']) {
+                $this->Session->setFlash('The provided passwords did not match. Please try again.','error');
+            } else{
                 $this->User->create();
-
                 if ($this->User->save($this->request->data)) {
-                    $id = $this->User->id;
                     unset($this->request->data['User']['password2']);
-                    $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
-                    $this->Auth->login($this->request->data['User']);
-                    return $this->redirect(array('controller'=>'dashboards','action' => 'index'));
+                    $this->request->data['User']['remember_me'] = true;
+                    return $this->login();
                 } else {
                     $this->Session->setFlash(__('The user could not be saved. Please, try again.'),'error');
                 }
-            } else {
-                $this->Session->setFlash('The provided passwords did not match. Please try again.','error');
-
             }
+
         }
         @$this->request->data['User']['password'] = '';
         @$this->request->data['User']['password2'] = '';

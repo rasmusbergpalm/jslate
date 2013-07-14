@@ -27,11 +27,14 @@ class AppController extends Controller {
     public $helpers = array('Form', 'Html', 'Time', 'Session');
 
     function beforeFilter(){
+        $this->Auth->redirectUrl("/dashboards/index");
+        $this->Auth->loginAction = "/pages/home";
         $this->RememberMe->check();
 
         $this->Security->validatePost = false;
         $this->Security->csrfCheck = false;
         $user = $this->Auth->user();
+
         $this->set('user', $user);
         if($user !== null){
             $this->loadModel('Dashboard');
