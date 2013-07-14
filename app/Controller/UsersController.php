@@ -51,6 +51,7 @@ class UsersController extends AppController {
                 if (!$this->User->save($this->request->data)) {
                     $this->Session->setFlash(__('You user could not be updated.'), 'error');
                 } else {
+                    $this->request->data['User']['remember_me'] = true;
                     return $this->login();
                 }
             }
