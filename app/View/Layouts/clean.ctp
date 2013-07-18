@@ -26,6 +26,7 @@
             echo $this->Html->script('codemirror-3.14/xml');
             echo $this->Html->script('codemirror-3.14/css');
             echo $this->Html->script('codemirror-3.14/htmlmixed');
+            echo $this->Html->script('codemirror-3.14/matchbrackets');
 
             echo $this->Html->script('codemirror-3.14/hint/show-hint.js');
             echo $this->Html->script('codemirror-3.14/hint/html-hint.js');
