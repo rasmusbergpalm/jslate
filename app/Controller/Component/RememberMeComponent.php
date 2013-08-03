@@ -8,11 +8,12 @@ class RememberMeComponent extends Component {
     var $period = '+1 year';
     var $cookieName = 'jSlateUser';
 
-    function remember($id, $email, $password) {
+    function remember($id, $email, $password, $encryptionKey) {
         $cookie = array(
             'id' => $id,
             'email' => $email,
-            'password' => Security::hash($password)
+            'password' => Security::hash($password),
+            'encryptionKey' => $encryptionKey
         );
 
         $this->Cookie->write($this->cookieName, $cookie, true, $this->period);
@@ -23,7 +24,11 @@ class RememberMeComponent extends Component {
 
         if (!is_array($cookie) || $this->Auth->user()) return;
 
-        if ($this->Auth->login($cookie)) {
+        $user = array(
+            'id' => $cookie['id'],
+            'email' => $cookie['email']
+        );
+        if ($this->Auth->login($user)) {
             $this->Cookie->write($this->cookieName, $cookie, true, $this->period);
         } else {
             $this->delete();
