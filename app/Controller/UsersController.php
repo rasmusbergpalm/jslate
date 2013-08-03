@@ -13,6 +13,8 @@ class UsersController extends AppController {
 
     function logout() {
         $this->RememberMe->delete();
+        $this->Session->destroy();
+        $this->Cookie->destroy();
         return $this->redirect($this->Auth->logout());
     }
 
@@ -32,6 +34,7 @@ class UsersController extends AppController {
                 } else {
                     $this->RememberMe->remember($this->Auth->user('id'), $this->data['User']['email'], $this->data['User']['password']);
                 }
+                $this->Cookie->write('encryptionKey', Security::hash($this->request->data['User']['password'], null, Configure::read('encryptionSalt')));
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again.'),'error');

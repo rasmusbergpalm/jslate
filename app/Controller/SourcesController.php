@@ -23,6 +23,10 @@ class SourcesController extends AppController {
         $query = $this->request->data['query'];
 
         $properties = $this->Source->Sourceproperty->find('list', array('conditions' => array('source_id' => $id), 'fields' => array('key', 'value')));
+        $encryptionKey = $this->Cookie->read('encryptionKey');
+        foreach($properties as &$property){
+            $property = Security::rijndael($property, $encryptionKey, 'decrypt');
+        }
         $class = $source['Source']['type'] . 'Source';
         $sourceInstance = new $class($properties);
 
@@ -47,7 +51,7 @@ class SourcesController extends AppController {
             $this->request->data['Source']['type'] = $type;
             $this->request->data['Source']['user_id'] = $this->Auth->user('id');
             $this->Source->create();
-            $this->Source->saveSource($this->request->data);
+            $this->Source->saveSource($this->request->data, $this->Cookie->read('encryptionKey'));
         }
         $this->render(strtolower($type));
     }

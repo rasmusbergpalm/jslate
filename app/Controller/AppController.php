@@ -17,6 +17,7 @@ class AppController extends Controller {
         'RememberMe',
         'Security',
         'RequestHandler',
+        'Cookie',
         'Auth' => array(
             'authenticate' => array(
                 'Form' => array(
@@ -29,6 +30,7 @@ class AppController extends Controller {
     function beforeFilter(){
         $this->Auth->redirectUrl("/dashboards/index");
         $this->Auth->loginAction = "/pages/home";
+        $this->Cookie->type('rijndael');
         $this->RememberMe->check();
 
         $this->Security->validatePost = false;
