@@ -27,7 +27,7 @@ class DashboardsController extends AppController {
         }
         $dashboard = $this->Dashboard->read(null, $id);
         if (!empty($dashboard) && $dashboard['Dashboard']['user_id'] == $this->Auth->user('id')) {
-            $this->set('dashboard_id', $id);
+            $this->Session->write('dashboard_id', $id);
             $this->set('dashboard', $dashboard);
         } else {
             $this->Session->setFlash('Invalid dashboard.', 'error');

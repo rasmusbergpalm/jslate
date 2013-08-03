@@ -1,5 +1,5 @@
-<div class="dbviews index">
-	<h2><?php echo __('Dbviews');?></h2>
+<div class="widgets index">
+	<h2><?php echo __('Widgets');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('name');?></th>
@@ -7,17 +7,17 @@
 	</tr>
 	<?php
 	$i = 0;
-	foreach ($dbviews as $dbview):
+	foreach ($widgets as $widget):
 		$class = null;
 		if ($i++ % 2 == 0) {
 			$class = ' class="altrow"';
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $dbview['Dbview']['name']; ?>&nbsp;</td>
+		<td><?php echo $widget['Widget']['name']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $dbview['Dbview']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $dbview['Dbview']['id']), null, sprintf(__('Are you sure you want to delete # %s?'), $dbview['Dbview']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $widget['Widget']['id'])); ?>
+			<?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $widget['Widget']['id']), null, sprintf(__('Are you sure you want to delete # %s?'), $widget['Widget']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -39,7 +39,7 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Dbview'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New Widget'), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('List Dashboards'), array('controller' => 'dashboards', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Dashboard'), array('controller' => 'dashboards', 'action' => 'add')); ?> </li>
 	</ul>

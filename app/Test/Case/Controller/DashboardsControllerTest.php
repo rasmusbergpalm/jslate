@@ -8,7 +8,7 @@ App::uses('DashboardsController', 'Controller');
 require_once TESTS . 'AuthMocker.php';
 
 class DashboardsControllerTest extends AuthMocker {
-    public $fixtures = array('app.dashboard', 'app.dbview', 'app.user');
+    public $fixtures = array('app.dashboard', 'app.widget', 'app.user');
 
     var $name = 'Dashboards';
     var $mocks = array();

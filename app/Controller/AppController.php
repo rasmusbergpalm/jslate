@@ -45,4 +45,8 @@ class AppController extends Controller {
             )));
         }
     }
+
+    function beforeRender(){
+        $this->set('dashboard_id', $this->Session->read('dashboard_id'));
+    }
 }

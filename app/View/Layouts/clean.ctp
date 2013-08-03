@@ -49,28 +49,27 @@
             $(document).ready(function(){
                 $('.flashMessage').fadeIn(500).delay(5000).fadeOut(1000);
             });
+
             function proxy(url){
                 return "<?php echo h(Router::url('/')) ?>"+'proxy.php?url='+encodeURIComponent(url);
             }
 
-        </script>
-        <script type="text/javascript">
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-28317188-1']);
-          _gaq.push(['_setDomainName', 'jslate.com']);
-          _gaq.push(['_trackPageview']);
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-28317188-1']);
+            _gaq.push(['_setDomainName', 'jslate.com']);
+            _gaq.push(['_trackPageview']);
 
-          function ga_heartbeat(){
-              _gaq.push(['_trackEvent', 'Heartbeat', 'Heartbeat', '', 0, true]);
-              setTimeout(ga_heartbeat, 60*1000);
-          }
-          ga_heartbeat();
+            function ga_heartbeat(){
+                _gaq.push(['_trackEvent', 'Heartbeat', 'Heartbeat', '', 0, true]);
+                setTimeout(ga_heartbeat, 60*1000);
+            }
+            ga_heartbeat();
 
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
         </script>
 
     </head>
@@ -105,7 +104,7 @@
                         <?php elseif(strpos($this->here, 'dashboards/view') !== false): ?>
                             <li><?php echo $this->Html->link('Edit dashboard', '/dashboards/edit/'.$dashboard_id); ?></li>
                             <li class="divider-vertical"></li>
-                            <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
+                            <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/sources/select/', array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
                         <?php endif; ?>
                         <?php if(@strpos($user['email'],'jSlateDemoUser')!==false): ?>
                             <li class="divider-vertical"></li>

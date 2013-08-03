@@ -1,6 +1,6 @@
 <?php
-class Dbview extends AppModel {
-	var $name = 'Dbview';
+class Widget extends AppModel {
+	var $name = 'Widget';
 	var $displayField = 'name';
 	var $validate = array(
 		'name' => array(

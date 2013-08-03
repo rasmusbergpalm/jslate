@@ -25,8 +25,8 @@ class Dashboard extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
-		'Dbview' => array(
-			'className' => 'Dbview',
+		'Widget' => array(
+			'className' => 'Widget',
 			'foreignKey' => 'dashboard_id',
 			'dependent' => false,
 			'conditions' => '',
