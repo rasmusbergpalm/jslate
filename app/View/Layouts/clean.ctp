@@ -57,6 +57,7 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-28317188-1']);
             _gaq.push(['_setDomainName', 'jslate.com']);
+            _gaq.push(['_setSiteSpeedSampleRate', 100]);
             _gaq.push(['_trackPageview']);
 
             function ga_heartbeat(){
