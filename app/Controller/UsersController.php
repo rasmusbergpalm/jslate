@@ -29,7 +29,7 @@ class UsersController extends AppController {
     function login() {
         if (!empty($this->request->data)) {
             if ($this->Auth->login()) {
-                $this->RememberMe->remember($this->Auth->user('id'), $this->data['User']['email'], $this->data['User']['password'], Security::hash($this->request->data['User']['password'], null, Configure::read('encryptionSalt')));
+                $this->RememberMe->remember($this->Auth->user('id'), $this->data['User']['email'], $this->data['User']['password']);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again.'),'error');
