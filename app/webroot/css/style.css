@@ -35,3 +35,17 @@
 .CodeMirror {
     font-size: 12px;
 }
+
+.ui-accordion-header {
+    background-color: #2f2f2f;
+    border: 1px solid #999999;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 0px;
+    border: 1px solid #999999;
+}
+
+.ui-accordion .ui-state-default {
+    color: white;
+}
