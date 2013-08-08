@@ -1,0 +1,1 @@
+ALTER TABLE `dashboards` ADD COLUMN `javascript` LONGTEXT NULL, ADD COLUMN `css` LONGTEXT NULL
