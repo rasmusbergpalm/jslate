@@ -1,4 +1,7 @@
 <?php
+$this->Html->scriptBlock($dashboard['Dashboard']['javascript'], array('inline' => false));
+$this->Blocks->append('css', $this->Html->tag('style', $dashboard['Dashboard']['css'], array('type' => 'text/css')));
+
 $zid=1;
 foreach ($dashboard['Dbview'] as $dbview){
     $zid++;
