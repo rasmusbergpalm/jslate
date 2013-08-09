@@ -11,11 +11,14 @@
             echo $this->Html->css('bootstrap-responsive.min');
             echo $this->Html->css('darkstrap-v0.9.0');
             echo $this->Html->css('jquery-ui');
-            echo $this->Html->css('style');
 
             echo $this->Html->css('codemirror-3.14/codemirror');
             echo $this->Html->css('codemirror-3.14/ambiance');
             echo $this->Html->css('codemirror-3.14/hint/show-hint');
+            
+            echo $this->Html->css('style');
+            
+            echo $this->fetch('css');
 
             echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
             echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js');
@@ -43,7 +46,7 @@
             echo $this->Html->script('d3/d3.layout');
             echo $this->Html->script('d3/d3.time');
 
-            echo $scripts_for_layout;
+            echo $this->fetch('script');
         ?>
         <script type="text/javascript">
             $(document).ready(function(){
@@ -118,7 +121,7 @@
         </div>
 
         <div class="container" id="content">
-            <?php echo $content_for_layout; ?>
+            <?php echo $this->fetch('content'); ?>
         </div>
     </body>
 </html>
