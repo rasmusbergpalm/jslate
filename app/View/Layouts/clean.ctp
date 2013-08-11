@@ -105,7 +105,7 @@
                         <?php elseif(strpos($this->here, 'dashboards/view') !== false): ?>
                             <li><?php echo $this->Html->link('Edit dashboard', '/dashboards/edit/'.$dashboard_id); ?></li>
                             <li class="divider-vertical"></li>
-                            <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/sources/select/', array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
+                            <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/widgets/add/', array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
                         <?php endif; ?>
                         <?php if(@strpos($user['email'],'jSlateDemoUser')!==false): ?>
                             <li class="divider-vertical"></li>

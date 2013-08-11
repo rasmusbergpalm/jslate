@@ -6,13 +6,12 @@ class WidgetsController extends AppController {
     var $name = 'Widgets';
     var $uses = array('Widget', 'Source');
 
-    function add($source_id, $template = null) {
-        if (!empty($template) && !empty($source_id)) {
+    function add($template = null) {
+        if (!empty($template)) {
             $this->Widget->create();
             $this->request->data['Widget']['name'] = $template;
             $this->request->data['Widget']['code'] = file_get_contents(APP . 'templates' . DS . $template);
             $this->request->data['Widget']['dashboard_id'] = $this->Session->read('dashboard_id');
-            $this->request->data['Widget']['source_id'] = $source_id;
             $this->request->data['Widget']['left'] = 12;
             $this->request->data['Widget']['top'] = 52;
             $this->request->data['Widget']['width'] = 300;
@@ -29,7 +28,7 @@ class WidgetsController extends AppController {
             $templates[basename($f)] = file_get_contents($f);
         }
 
-        $this->set(compact('templates', 'source_id'));
+        $this->set(compact('templates'));
     }
 
     function edit($id = null) {
@@ -47,9 +46,13 @@ class WidgetsController extends AppController {
         if (empty($this->request->data)) {
             $this->request->data = $this->Widget->read(null, $id);
         }
-        $dashboard_id = $this->request->data['Widget']['dashboard_id'];
-        $dashboards = $this->Widget->Dashboard->find('list');
-        $this->set(compact('dashboards', 'dashboard_id'));
+        $sources = $this->Widget->Query->Source->find('list', array(
+            'conditions' => array(
+                'user_id' => $this->Auth->user('id')
+            )
+        ));
+        $this->set('sources', $sources);
+        $this->set('types', $this->Widget->Query->Source->types);
     }
 
     function update($id = null) {

@@ -70,9 +70,14 @@ class Widget extends AppModel {
 		'Dashboard' => array(
 			'className' => 'Dashboard',
 			'foreignKey' => 'dashboard_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
 		)
 	);
+
+    var $hasOne = array(
+        'Query'  => array(
+            'className' => 'Query',
+            'foreignKey' => 'widget_id'
+        )
+    );
+
 }

@@ -1,5 +1,4 @@
 <?php
-App::uses('MysqlSource', 'Sources');
 App::uses('AppController', 'Controller');
 /**
  * Sources Controller
@@ -7,43 +6,6 @@ App::uses('AppController', 'Controller');
  * @property Source $Source
  */
 class SourcesController extends AppController {
-
-    private $types = array(
-        'Mysql'
-    );
-
-    public function query($id) {
-        $source = $this->Source->find('first', array(
-            'id' => $id,
-            'user_id' => $this->Auth->user('id')
-        ));
-        if (empty($source)) throw new NotFoundException(__('Data source not found'));
-        if (!$this->request->is('post')) throw new MethodNotAllowedException('You must use POST');
-        if (!isset($this->request->data['query'])) throw new InvalidArgumentException('You must pass a "query" parameter');
-        $query = $this->request->data['query'];
-
-        $properties = $this->Source->Sourceproperty->find('list', array('conditions' => array('source_id' => $id), 'fields' => array('key', 'value')));
-        $encryptionKey = Configure::read('encryptionKey');
-        foreach($properties as &$property){
-            $property = Security::rijndael($property, $encryptionKey, 'decrypt');
-        }
-        $class = $source['Source']['type'] . 'Source';
-        $sourceInstance = new $class($properties);
-
-        $result = $sourceInstance->query($query);
-        $this->set(compact('result'));
-        $this->set('_serialize', array('result'));
-    }
-
-    public function select(){
-        $sources = $this->Source->find('list', array(
-            'conditions' => array(
-                'user_id' => $this->Auth->user('id')
-            )
-        ));
-        $this->set('sources', $sources);
-        $this->set('types', $this->types);
-    }
 
     public function add($type = null) {
         if (!in_array($type, $this->types)) throw new NotFoundException('Data source type not found');

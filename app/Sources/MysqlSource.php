@@ -20,7 +20,7 @@ class MysqlSource implements SourceInterface {
         $this->mysql = new Mysql($properties);
     }
 
-    public function query($query) {
-        return $this->mysql->query($query);
+    public function query($properties) {
+        return $this->mysql->query($properties['query']);
     }
 }

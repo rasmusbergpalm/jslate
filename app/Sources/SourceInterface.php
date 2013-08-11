@@ -3,8 +3,8 @@
 interface SourceInterface {
 
     /**
-     * @param $query
+     * @param $properties
      * @return array
      */
-    public function query($query);
+    public function query($properties);
 }
