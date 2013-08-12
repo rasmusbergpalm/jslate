@@ -34,6 +34,32 @@ class DashboardsController extends AppController {
             return $this->redirect('/');
         }
     }
+    
+    function export($id = null) {
+        $this->layout = '';
+        return $this->view($id);
+    }
+    
+    function import() {
+        if (!empty($this->request->data)) {
+            $upload = $this->request->data['Dashboard']['import'];
+            
+            if (!empty($upload['tmp_name'])) {
+                $json = json_decode(file_get_contents($upload['tmp_name']), true);
+                $json['Dashboard']['user_id'] = $this->Auth->user('id');
+                $json['Dashboard']['public_id'] = Security::hash(openssl_random_pseudo_bytes(40));
+                if ($this->Dashboard->saveAssociated($json)) {
+                    return $this->redirect(array('action' => 'view', $this->Dashboard->getLastInsertId()));
+                }
+                else {
+                    $this->Session->setFlash(__('You must specify a valid jslate export.'), 'error');
+                }
+            }
+            else {
+                $this->Session->setFlash(__('You must specify a valid jslate export.'), 'error');
+            }
+        }
+    }
 
     function readonly($public_id){
         $dashboard = $this->Dashboard->findByPublicId($public_id);
