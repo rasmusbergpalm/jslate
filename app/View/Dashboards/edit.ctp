@@ -20,7 +20,13 @@
             </div>
         </div>
     </div>
-    <?php echo $this->Form->submit(__('Save'), array('class'=>'btn')); ?>
+    <div class="submit" style="padding-top: 5px">
+        <?php echo $this->Form->submit(__('Save'), array('class'=>'btn', 'div' => false)); ?>
+        <?php echo $this->Html->link('Export', array('controller' => 'dashboards', 'action' => 'export', $dashboard_id),
+                array('class' => 'btn')); ?>
+        <?php echo $this->Html->link('Delete', array('controller' => 'dashboards', 'action' => 'delete', $dashboard_id),
+                array('class' => 'btn')); ?>
+    </div>
     <?php echo $this->Form->end(); ?>
 </div>
 
