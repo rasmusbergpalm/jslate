@@ -92,6 +92,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboards <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><?php echo $this->Html->link('Add dashboard', array('controller'=>'dashboards', 'action'=>'add')); ?></li>
+                                <li><?php echo $this->Html->link('Import dashboard', array('controller'=>'dashboards', 'action'=>'import')); ?></li>
                                 <li class="divider"></li>
                                 <?php
                                     foreach ($dblist as $id => $name) {

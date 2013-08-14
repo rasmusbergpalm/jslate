@@ -1,6 +1,9 @@
 <?php
-$this->Html->scriptBlock($dashboard['Dashboard']['javascript'], array('inline' => false));
-$this->Blocks->append('css', $this->Html->tag('style', $dashboard['Dashboard']['css'], array('type' => 'text/css')));
+$this->Html->scriptBlock($dashboard['Dashboard']['javascript'], array('inline' => false, 'safe' => false));
+if ($dashboard['Dashboard']['css'] != null) {
+    //If css is null tag() will only print out the start tag
+    $this->Blocks->append('css', $this->Html->tag('style', $dashboard['Dashboard']['css'], array('type' => 'text/css')));
+}
 
 $zid=1;
 foreach ($dashboard['Dbview'] as $dbview){
