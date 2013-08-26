@@ -12,7 +12,7 @@ foreach ($dashboard['Dbview'] as $dbview){
     $wid = 'id_'.uniqid();
     $code = str_replace('${wid}', $wid, $dbview['code']);
     $style = $user == null ? 'cursor:auto' : '';
-    echo "<textarea id='code$id' style='display: none;'>$code</textarea>";
+    echo "<textarea id='code$id' style='display: none;'>".htmlentities($code)."</textarea>";
     echo "<div class='well dragbox' id='dragbox_$id' style='z-index: $zid; left: ".$dbview['left']."px; top: ".$dbview['top']."px; width: ".($dbview['width'])."px; height: ".($dbview['height'])."px;'>";
     echo "<div class='header' style='$style'>";
     echo "<span>&nbsp;";
