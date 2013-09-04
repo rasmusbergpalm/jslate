@@ -108,10 +108,17 @@
                             <li><div><?php echo $this->Html->link('Sign in', '/users/login/', array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
                         <?php elseif(strpos($this->here, 'dashboards/view') !== false): ?>
                             <li><?php echo $this->Html->link('Edit dashboard', '/dashboards/edit/'.$dashboard_id); ?></li>
+                            <?php if (!$demo_user): ?>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user['email'] ?> <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><?php echo $this->Html->link('Edit', array('controller'=>'users', 'action'=>'edit')); ?></li>
+                                        <li><?php echo $this->Html->link('Logout', '/users/logout/' . $dashboard_id, array('escape'=>false)); ?></li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
                             <li class="divider-vertical"></li>
                             <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
-                            <li class="divider-vertical"></li>
-                            <li><div><?php echo $this->Html->link('Logout', '/users/logout/' . $dashboard_id, array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
                         <?php endif; ?>
                         <?php if(@strpos($user['email'],'jSlateDemoUser')!==false): ?>
                             <li class="divider-vertical"></li>

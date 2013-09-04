@@ -29,6 +29,11 @@ class DashboardsController extends AppController {
         if (!empty($dashboard) && $dashboard['Dashboard']['user_id'] == $this->Auth->user('id')) {
             $this->set('dashboard_id', $id);
             $this->set('dashboard', $dashboard);
+
+            $this->set('demo_user', false);
+            if (substr($this->Auth->user()['email'], 0, 14) === 'jSlateDemoUser'){
+                $this->set('demo_user', true);
+            }
         } else {
             $this->Session->setFlash('Invalid dashboard.', 'error');
             return $this->redirect('/');
