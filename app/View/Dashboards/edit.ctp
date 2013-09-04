@@ -1,9 +1,10 @@
 <h2> Edit dashboard </h2>
 <div class="dashboards form">
     <h4>Public link (read only)</h4>
-    <a href=<?php echo Router::url(array('action' => 'readonly', $this->request->data['Dashboard']['public_id']), true); ?>>
-        <?php echo Router::url(array('action' => 'readonly', $this->request->data['Dashboard']['public_id']), true); ?>
-    </a>
+        <?php
+            $location = Router::url(array('action' => 'readonly', $this->request->data['Dashboard']['public_id']), true);
+            echo $this->Html->link($location, $location, array('target' => '_blank'));
+        ?>
     <h4>Change name</h4>
     <?php echo $this->Form->create('Dashboard');?>
     <?php echo $this->Form->input('name'); ?>
