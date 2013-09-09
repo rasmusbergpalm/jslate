@@ -112,8 +112,8 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user['email'] ?> <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><?php echo $this->Html->link('Edit', array('controller'=>'users', 'action'=>'edit')); ?></li>
-                                        <li><?php echo $this->Html->link('Logout', '/users/logout/' . $dashboard_id, array('escape'=>false)); ?></li>
+                                        <li><?php echo $this->Html->link('Edit', '/users/edit'); ?></li>
+                                        <li><?php echo $this->Html->link('Logout', '/users/logout'); ?></li>
                                     </ul>
                                 </li>
                             <?php endif; ?>

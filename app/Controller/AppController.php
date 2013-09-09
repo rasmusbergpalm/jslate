@@ -37,6 +37,12 @@ class AppController extends Controller {
 
         $this->set('user', $user);
         if($user !== null){
+
+            $this->set('demo_user', false);
+            if (substr($this->Auth->user()['email'], 0, 14) === 'jSlateDemoUser'){
+                $this->set('demo_user', true);
+            }
+
             $this->loadModel('Dashboard');
             $this->set('dblist', $this->Dashboard->find('list', array(
                 'conditions' => array(
