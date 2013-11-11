@@ -1,4 +1,5 @@
 <h2>Select a template</h2>
+<small>NOTE: jSlate offers widgets rendered using highcharts which is commercial software. Please observe the highcharts license if you use them.</small>
 <?php
 foreach ($templates as $name=>$code){
     $id = $name;
