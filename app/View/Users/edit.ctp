@@ -1,5 +1,9 @@
-<h2>Sign up</h2>
-<p>Any dashboards you've made will be carried over to your new account.</p>
+<?php if(empty($user)): ?>
+    <h2>Sign up</h2>
+    <p>Any dashboards you've made will be carried over to your new account.</p>
+<?php else: ?>
+    <h2>Edit User</h2>
+<?php endif; ?>
 <?php
 echo $this->Form->create('User', array(
     'inputDefaults' => array(
