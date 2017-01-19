@@ -120,6 +120,8 @@
                             <?php endif; ?>
                             <li class="divider-vertical"></li>
                             <li><div><?php echo $this->Html->link('<i class="icon-plus icon-white"></i> Add widget', '/dbviews/add/' . $dashboard_id, array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
+                            <li class="divider-vertical"></li>
+                            <li><div><?php echo $this->Html->link('Logout', '/users/logout/' . $dashboard_id, array('class'=>'btn btn-primary', 'escape'=>false)); ?></div></li>
                         <?php endif; ?>
                         <?php if(@strpos($user['email'],'jSlateDemoUser')!==false): ?>
                             <li class="divider-vertical"></li>
